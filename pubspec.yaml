@@ -1,5 +1,5 @@
 name: todoku
-description: "A new Flutter project."
+description: "A powerful task management app"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -30,10 +30,50 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+
+  # State Management
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+
+  # Navigation
+  go_router: ^16.2.1
+
+  # UI/UX
+  flutter_screenutil: ^5.9.3
+  animations: ^2.0.11
+  shimmer: ^3.0.0
+
+  # Data & Storage
+  json_annotation: ^4.9.0
+  freezed_annotation: ^3.1.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  shared_preferences: ^2.5.3
+
+  # Firebase
+  firebase_core: ^4.1.0
+  firebase_auth: ^6.0.2
+  firebase_messaging: ^16.0.1
+  cloud_firestore: ^6.0.1
+
+  # Authentication
+  google_sign_in: ^7.1.1
+  sign_in_with_apple: ^7.0.1
+  local_auth: ^2.3.0
+
+  # Network
+  connectivity_plus: ^6.1.5
+  dio: ^5.9.0
+
+  # Utils
+  intl: ^0.20.2
+  uuid: ^4.5.1
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +86,12 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
 
+  # Code Generation
+  build_runner: ^2.4.10
+  json_serializable: ^6.8.0
+  freezed: ^3.0.0-0.0.dev
+  go_router_builder: ^2.7.0
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -56,11 +102,16 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
+    - assets/svgs/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
