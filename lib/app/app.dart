@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoku/presentation/navigation/app_router.dart';
 import 'app_keys.dart';
 
 class MyApp extends StatelessWidget {
@@ -10,11 +11,8 @@ class MyApp extends StatelessWidget {
       navigatorKey: appNavigatorKey,
       debugShowCheckedModeBanner: false,
       title: "ToDoKu",
-      home: const Scaffold(
-        body: Center(
-          child: Text('App Initialized'),
-        ),
-      ),
+      initialRoute: '/',
+      onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
 }
