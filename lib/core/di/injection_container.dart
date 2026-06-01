@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:todoku/core/database/secure_database.dart';
+import 'package:todoku/core/presentation/bloc/app_config_bloc.dart';
 import 'package:todoku/features/task/data/datasources/task_local_datasource.dart';
 import 'package:todoku/features/task/data/datasources/task_local_datasource_impl.dart';
 import 'package:todoku/features/task/data/repositories/task_repository_impl.dart';
@@ -51,4 +52,6 @@ Future<void> initInjection() async {
       deleteTask: sl(),
     ),
   );
+
+  sl.registerFactory(() => AppConfigBloc());
 }
