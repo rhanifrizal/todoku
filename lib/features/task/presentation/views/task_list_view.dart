@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoku/core/localization/l10n_extensions.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
+import 'package:todoku/features/task/presentation/widgets/empty_state_widget.dart';
 import 'package:todoku/features/task/presentation/widgets/task_tile.dart';
 
 class TaskListView extends StatelessWidget {
@@ -50,8 +51,9 @@ class TaskListView extends StatelessWidget {
       );
     }
 
+    /// Global empty state: Absolutely zero tasks exist in the app database
     if (taskList.isEmpty) {
-      return Center(child: Text(context.l10n.noTaskFoundCreateOne));
+      return const EmptyStateWidget(isCompletedTasksSection: false);
     }
 
     final todoTasks = taskList.where((task) => !task.isCompleted).toList();
@@ -60,10 +62,10 @@ class TaskListView extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         /// TodoTasks Section
-        if (todoTasks.isNotEmpty) ...[
-          SliverToBoxAdapter(
-            child: _sectionHeader(context, title: context.l10n.todoList),
-          ),
+        SliverToBoxAdapter(
+          child: _sectionHeader(context, title: context.l10n.todoList),
+        ),
+        if (todoTasks.isNotEmpty)
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             sliver: SliverList(
@@ -72,18 +74,19 @@ class TaskListView extends StatelessWidget {
                 childCount: todoTasks.length,
               ),
             ),
+          )
+        else
+          /// Shows when user has completed tasks, but no active to do tasks remaining
+          const SliverToBoxAdapter(
+            child: EmptyStateWidget(isCompletedTasksSection: false),
           ),
-        ],
-
-        /// Spacer between sections if both contain data
-        if (todoTasks.isNotEmpty && completedTasks.isNotEmpty)
-          const SliverToBoxAdapter(child: SizedBox(height: 16)),
+        const SliverToBoxAdapter(child: SizedBox(height: 24)),
 
         /// CompletedTasks Section
-        if (completedTasks.isNotEmpty) ...[
-          SliverToBoxAdapter(
-            child: _sectionHeader(context, title: context.l10n.completedTasks),
-          ),
+        SliverToBoxAdapter(
+          child: _sectionHeader(context, title: context.l10n.completedTasks),
+        ),
+        if (completedTasks.isNotEmpty)
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             sliver: SliverList(
@@ -92,8 +95,12 @@ class TaskListView extends StatelessWidget {
                 childCount: completedTasks.length,
               ),
             ),
+          )
+        else
+          /// Shows when user has active tasks, but hasn't completed anything yet
+          const SliverToBoxAdapter(
+            child: EmptyStateWidget(isCompletedTasksSection: true),
           ),
-        ],
 
         /// Safety bottom padding so the floating action button doesn't block lists
         const SliverToBoxAdapter(child: SizedBox(height: 84)),

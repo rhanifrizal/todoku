@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:todoku/core/localization/l10n_extensions.dart';
@@ -47,14 +48,52 @@ class TaskTile extends StatelessWidget {
     return Dismissible(
       key: Key('task_${task.id}'),
       confirmDismiss: (direction) async {
+        final taskBloc = context.read<TaskBloc>();
+
+        await HapticFeedback.lightImpact();
+
+        if (!context.mounted) return false;
+
         if (direction == DismissDirection.startToEnd) {
           final updatedTask = task.copyWith(isCompleted: !task.isCompleted);
-          context.read<TaskBloc>().add(UpdateTaskEvent(updatedTask));
+          taskBloc.add(UpdateTaskEvent(updatedTask));
+
+          ScaffoldMessenger.of(context).clearSnackBars();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                updatedTask.isCompleted
+                    ? context.l10n.taskMarkedAsCompleted
+                    : context.l10n.taskMarkedAsIncomplete,
+              ),
+              behavior: SnackBarBehavior.floating,
+              action: SnackBarAction(
+                label: context.l10n.undo.toUpperCase(),
+                onPressed: () {
+                  taskBloc.add(UpdateTaskEvent(task));
+                },
+              ),
+            ),
+          );
           return false;
         }
 
         if (direction == DismissDirection.endToStart) {
-          context.read<TaskBloc>().add(DeleteTaskEvent(task.id));
+          taskBloc.add(DeleteTaskEvent(task.id));
+
+          ScaffoldMessenger.of(context).clearSnackBars();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(context.l10n.taskDeleted),
+              behavior: SnackBarBehavior.floating,
+              action: SnackBarAction(
+                label: context.l10n.undo.toUpperCase(),
+                onPressed: () {
+                  taskBloc.add(CreateTaskEvent(task));
+                },
+              ),
+            ),
+          );
           return true;
         }
         return false;
