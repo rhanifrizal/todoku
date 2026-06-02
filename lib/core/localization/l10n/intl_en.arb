@@ -35,5 +35,9 @@
   "noCompletedTasksYet": "No Completed Tasks Yet",
   "allDoneForNow": "All Done For Now",
   "completeYourTaskRightNow": "Complete Your Task Right Now!",
-  "createANewTaskRightNow": "Create a New Task Right Now!"
+  "createANewTaskRightNow": "Create a New Task Right Now!",
+  "tagsLabel": "Tags (Comma Separated)",
+  "tagsHint": "e.g. Work, Personal, Shopping",
+  "tagTooLongError": "Individual tags cannot exceed 15 characters",
+  "tooManyTagsError": "You can add a maximum of 5 tags"
 }

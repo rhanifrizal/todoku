@@ -319,6 +319,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create a New Task Right Now!'**
   String get createANewTaskRightNow;
+
+  /// No description provided for @tagsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tags (Comma Separated)'**
+  String get tagsLabel;
+
+  /// No description provided for @tagsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Work, Personal, Shopping'**
+  String get tagsHint;
+
+  /// No description provided for @tagTooLongError.
+  ///
+  /// In en, this message translates to:
+  /// **'Individual tags cannot exceed 15 characters'**
+  String get tagTooLongError;
+
+  /// No description provided for @tooManyTagsError.
+  ///
+  /// In en, this message translates to:
+  /// **'You can add a maximum of 5 tags'**
+  String get tooManyTagsError;
 }
 
 class _AppLocalizationsDelegate

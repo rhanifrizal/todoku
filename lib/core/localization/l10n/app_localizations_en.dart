@@ -122,4 +122,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createANewTaskRightNow => 'Create a New Task Right Now!';
+
+  @override
+  String get tagsLabel => 'Tags (Comma Separated)';
+
+  @override
+  String get tagsHint => 'e.g. Work, Personal, Shopping';
+
+  @override
+  String get tagTooLongError => 'Individual tags cannot exceed 15 characters';
+
+  @override
+  String get tooManyTagsError => 'You can add a maximum of 5 tags';
 }

@@ -35,16 +35,35 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+  final _tagsController = TextEditingController();
 
   TaskPriority _selectedPriority = TaskPriority.medium;
   DateTime _startDate = DateTime.now();
   DateTime? _dueDate;
 
+  static const int _maxTagsPerTask = 5;
+  static const int _maxTagLength = 15;
+
   @override
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
+    _tagsController.dispose();
     super.dispose();
+  }
+
+  List<String> _parseAndSanitizeTags(String input) {
+    if (input.trim().isEmpty) return const [];
+
+    // Whitelist approach: Remove raw control symbols, leaving alphanumeric, spaces, commas, and dashes
+    final sanitizedTags = input.replaceAll(RegExp(r'[^\w\s,\-]'), '');
+
+    return sanitizedTags
+        .split(',')
+        .map((tag) => tag.trim().toLowerCase())
+        .where((tag) => tag.isNotEmpty)
+        .take(_maxTagsPerTask)
+        .toList();
   }
 
   Future<void> _pickDate({required bool isStartDate}) async {
@@ -76,6 +95,8 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
   void _submitForm() {
     if (!_formKey.currentState!.validate()) return;
 
+    final sanitizedTags = _parseAndSanitizeTags(_tagsController.text);
+
     final newTask = TaskEntity(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       title: _titleController.text.trim(),
@@ -83,8 +104,10 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
       isCompleted: false,
       dateStart: _startDate,
       dueDate: _dueDate,
-      tags: const [],
+      tags: sanitizedTags,
       priority: _selectedPriority,
+      category: null,
+      groupId: null,
     );
 
     context.read<TaskBloc>().add(CreateTaskEvent(newTask));
@@ -137,6 +160,36 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
                   border: OutlineInputBorder(),
                   alignLabelWithHint: true,
                 ),
+              ),
+              const SizedBox(height: elementSpacing),
+              TextFormField(
+                controller: _tagsController,
+                textCapitalization: TextCapitalization.none,
+                decoration: InputDecoration(
+                  labelText: context.l10n.tagsLabel,
+                  hintText: context.l10n.tagsHint,
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.local_offer_outlined),
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) return null;
+
+                  final rawTags = value
+                      .split(',')
+                      .map((e) => e.trim())
+                      .where((e) => e.isNotEmpty);
+
+                  if (rawTags.length > _maxTagsPerTask) {
+                    return context.l10n.tooManyTagsError;
+                  }
+
+                  for (final tag in rawTags) {
+                    if (tag.length > _maxTagLength) {
+                      return context.l10n.tagTooLongError;
+                    }
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: elementSpacing),
               Text(context.l10n.priority, style: context.textTheme.bodyLarge),

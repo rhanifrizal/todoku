@@ -35,5 +35,9 @@
   "noCompletedTasksYet": "Tiada Tugasan Selesai Lagi",
   "allDoneForNow": "Semua Selesai Buat Masa Ini",
   "completeYourTaskRightNow": "Selesaikan Tugasan Anda Sekarang!",
-  "createANewTaskRightNow": "Cipta Tugasan Baru Sekarang!"
+  "createANewTaskRightNow": "Cipta Tugasan Baru Sekarang!",
+  "tagsLabel": "Tag (Dipisahkan Dengan Koma)",
+  "tagsHint": "cth. Kerja, Peribadi, Membeli-belah",
+  "tagTooLongError": "Tag individu tidak boleh melebihi 15 aksara",
+  "tooManyTagsError": "Anda boleh menambah maksimum 5 tag"
 }

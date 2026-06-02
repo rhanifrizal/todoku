@@ -122,4 +122,16 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get createANewTaskRightNow => 'Cipta Tugasan Baru Sekarang!';
+
+  @override
+  String get tagsLabel => 'Tag (Dipisahkan Dengan Koma)';
+
+  @override
+  String get tagsHint => 'cth. Kerja, Peribadi, Membeli-belah';
+
+  @override
+  String get tagTooLongError => 'Tag individu tidak boleh melebihi 15 aksara';
+
+  @override
+  String get tooManyTagsError => 'Anda boleh menambah maksimum 5 tag';
 }
