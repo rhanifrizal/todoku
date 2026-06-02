@@ -34,12 +34,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     Emitter<TaskState> emit,
   ) async {
     emit(const TaskLoadingState());
-    final (failure, tasks) = await _getTasksUsecase(const NoParams());
+    final (failure, tasksList) = await _getTasksUsecase(const NoParams());
 
     if (failure != null) {
       emit(TaskFailureState(errorMessage: failure.message));
-    } else if (tasks != null) {
-      emit(TaskSuccessState(tasks: tasks));
+    } else if (tasksList != null) {
+      emit(TaskSuccessState(tasksList: tasksList));
     }
   }
 

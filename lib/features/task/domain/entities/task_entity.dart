@@ -37,11 +37,11 @@ class TaskEntity {
     String? description,
     bool? isCompleted,
     DateTime? dateStart,
-    DateTime? dueDate,
+    DateTime? Function()? dueDate,
     List<String>? tags,
-    String? category,
+    String? Function()? category,
     TaskPriority? priority,
-    String? groupId,
+    String? Function()? groupId,
   }) {
     return TaskEntity(
       id: id ?? this.id,
@@ -49,11 +49,11 @@ class TaskEntity {
       description: description ?? this.description,
       isCompleted: isCompleted ?? this.isCompleted,
       dateStart: dateStart ?? this.dateStart,
-      dueDate: dueDate ?? this.dueDate,
+      dueDate: dueDate != null ? dueDate() : this.dueDate,
       tags: tags ?? this.tags,
-      category: category ?? this.category,
+      category: category != null ? category() : this.category,
       priority: priority ?? this.priority,
-      groupId: groupId ?? this.groupId,
+      groupId: groupId != null ? groupId() : this.groupId,
     );
   }
 }

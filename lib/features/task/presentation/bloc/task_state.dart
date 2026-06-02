@@ -20,12 +20,12 @@ final class TaskLoadingState extends TaskState {
 
 /// State emitted when task actions execute flawlessly, delivering updated datasets
 final class TaskSuccessState extends TaskState {
-  final List<TaskEntity> tasks;
+  final List<TaskEntity> tasksList;
 
-  const TaskSuccessState({required this.tasks});
+  const TaskSuccessState({required this.tasksList});
 
   @override
-  List<Object?> get props => [tasks];
+  List<Object?> get props => [tasksList];
 }
 
 /// State emitted when cryptographic keys fail or storage operations throw an exception
