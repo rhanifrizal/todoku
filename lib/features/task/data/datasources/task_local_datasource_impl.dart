@@ -7,7 +7,7 @@ import 'package:todoku/features/task/domain/entities/task_entity.dart';
 final class TaskLocalDataSourceImpl implements TaskLocalDataSource {
   final SecureDatabase _db;
 
-  TaskLocalDataSourceImpl({required SecureDatabase db}) : _db = db;
+  const TaskLocalDataSourceImpl({required SecureDatabase db}) : _db = db;
 
   @override
   Future<List<TaskModel>> getCachedTasks() async {
