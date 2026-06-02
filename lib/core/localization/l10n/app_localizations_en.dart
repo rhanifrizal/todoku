@@ -38,12 +38,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings => 'Settings';
 
   @override
-  String get darkMode => 'Dark Mode';
+  String get theme => 'Theme';
 
   @override
-  String currentTheme(String theme) {
-    return 'Current: $theme';
+  String currentTheme(Object mode) {
+    return 'Current: $mode';
   }
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
 
   @override
   String get language => 'Language';

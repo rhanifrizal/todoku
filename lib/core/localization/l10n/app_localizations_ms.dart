@@ -38,12 +38,21 @@ class AppLocalizationsMs extends AppLocalizations {
   String get settings => 'Tetapan';
 
   @override
-  String get darkMode => 'Mod Gelap';
+  String get theme => 'Tema';
 
   @override
-  String currentTheme(String theme) {
-    return 'Semasa: $theme';
+  String currentTheme(Object mode) {
+    return 'Semasa: $mode';
   }
+
+  @override
+  String get themeSystem => 'Sistem';
+
+  @override
+  String get themeLight => 'Cerah';
+
+  @override
+  String get themeDark => 'Gelap';
 
   @override
   String get language => 'Bahasa';

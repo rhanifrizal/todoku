@@ -8,15 +8,11 @@
   "save": "Save",
   "routePathNotFound": "Route path not found: {path}",
   "settings": "Settings",
-  "darkMode": "Dark Mode",
-  "currentTheme": "Current: {theme}",
-  "@currentTheme": {
-    "placeholders": {
-      "theme": {
-        "type": "String"
-      }
-    }
-  },
+  "theme": "Theme",
+  "currentTheme": "Current: {mode}",
+  "themeSystem": "System",
+  "themeLight": "Light",
+  "themeDark": "Dark",
   "language": "Language",
   "english": "English",
   "malay": "Bahasa Melayu"

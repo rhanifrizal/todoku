@@ -9,14 +9,11 @@
   "routePathNotFound": "Laluan navigasi tidak ditemui: {path}",
   "settings": "Tetapan",
   "darkMode": "Mod Gelap",
-  "currentTheme": "Semasa: {theme}",
-  "@currentTheme": {
-    "placeholders": {
-      "theme": {
-        "type": "String"
-      }
-    }
-  },
+  "theme": "Tema",
+  "currentTheme": "Semasa: {mode}",
+  "themeSystem": "Sistem",
+  "themeLight": "Cerah",
+  "themeDark": "Gelap",
   "language": "Bahasa",
   "english": "English",
   "malay": "Bahasa Melayu"
