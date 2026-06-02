@@ -5,7 +5,7 @@ import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
 import 'package:todoku/features/task/presentation/bloc/task_state.dart';
 import 'package:todoku/features/task/presentation/views/task_list_view.dart';
-import 'package:todoku/features/task/presentation/widgets/add_task_dialog.dart';
+import 'package:todoku/features/task/presentation/widgets/add_task_bottom_sheet.dart';
 
 class TaskListScreen extends StatelessWidget {
   const TaskListScreen({super.key});
@@ -34,7 +34,7 @@ class TaskListScreen extends StatelessWidget {
               isLoading: state.isLoading && state.taskList.isEmpty,
               errorMessage: state.taskList.isEmpty ? state.errorMessage : null,
               tasksList: state.taskList,
-              onAddTaskPressed: () => showAddTaskDialog(blocContext),
+              onAddTaskPressed: () => showAddTaskSheet(blocContext),
             );
           },
         ),
