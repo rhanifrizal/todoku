@@ -4,6 +4,7 @@ import 'package:todoku/app/routes/app_routes.dart';
 import 'package:todoku/app/theme/app_theme.dart';
 import 'package:todoku/core/di/injection_container.dart' as di;
 import 'package:todoku/core/localization/l10n/app_localizations.dart';
+import 'package:todoku/core/localization/l10n_extensions.dart';
 import 'package:todoku/features/app_config/presentation/bloc/app_config_bloc.dart';
 import 'package:todoku/features/app_config/presentation/bloc/app_config_event.dart';
 import 'package:todoku/features/app_config/presentation/bloc/app_config_state.dart';
@@ -24,7 +25,7 @@ class TodoKuApp extends StatelessWidget {
       child: BlocBuilder<AppConfigBloc, AppConfigState>(
         builder: (context, state) {
           return MaterialApp.router(
-            title: 'TodoKu',
+            title: context.l10n.appTitle,
             debugShowCheckedModeBanner: false,
             themeMode: state.themeMode,
             theme: AppTheme.lightTheme,
