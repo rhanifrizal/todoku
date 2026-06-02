@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todoku/core/localization/l10n_extensions.dart';
+import 'package:todoku/features/app_config/presentation/screens/settings_screen.dart';
+import 'package:todoku/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:todoku/features/task/presentation/screens/task_list_screen.dart';
 
 class AppRoutes {
@@ -9,19 +11,34 @@ class AppRoutes {
 
   static const String root = "/";
   static const String taskList = "/taskList";
+  static const String settings = "/settings";
 
   static final GoRouter router = GoRouter(
     navigatorKey: _navigatorKey,
     initialLocation: root,
-    debugLogDiagnostics: true,
+    debugLogDiagnostics: false,
     routes: <RouteBase>[
       GoRoute(path: root, redirect: (context, state) => taskList),
-      GoRoute(
-        path: taskList,
-        name: taskList,
-        builder: (BuildContext context, GoRouterState state) {
-          return const TaskListScreen();
+      ShellRoute(
+        builder: (context, state, child) {
+          return DashboardScreen(child: child);
         },
+        routes: [
+          GoRoute(
+            path: taskList,
+            name: taskList,
+            builder: (BuildContext context, GoRouterState state) {
+              return const TaskListScreen();
+            },
+          ),
+          GoRoute(
+            path: settings,
+            name: settings,
+            builder: (BuildContext context, GoRouterState state) {
+              return const SettingsScreen();
+            },
+          ),
+        ],
       ),
     ],
     errorBuilder: (context, state) => Scaffold(
