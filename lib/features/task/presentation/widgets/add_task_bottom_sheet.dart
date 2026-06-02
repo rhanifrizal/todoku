@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:todoku/core/localization/l10n_extensions.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
@@ -46,12 +47,20 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
     super.dispose();
   }
 
+  String _formatDisplayDate(BuildContext context, DateTime date) {
+    final String locale = Localizations.localeOf(context).languageCode;
+    return DateFormat("d MMMM yyyy", locale).format(date.toLocal());
+  }
+
   Future<void> _pickDate({required bool isStartDate}) async {
-    final initialDate = isStartDate ? _startDate : (_dueDate ?? DateTime.now());
+    FocusScope.of(context).unfocus();
+
     final pickedDate = await showDatePicker(
       context: context,
-      initialDate: initialDate,
-      firstDate: DateTime(2020),
+      initialDate: isStartDate ? _startDate : (_dueDate ?? _startDate),
+      firstDate: isStartDate
+          ? DateTime.now().subtract(const Duration(days: 365))
+          : _startDate,
       lastDate: DateTime(2100),
     );
 
@@ -60,7 +69,7 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
         if (isStartDate) {
           _startDate = pickedDate;
           if (_dueDate != null && _dueDate!.isBefore(_startDate)) {
-            _dueDate = null;
+            _dueDate = _startDate;
           }
         } else {
           _dueDate = pickedDate;
@@ -170,7 +179,7 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
                       onPressed: () => _pickDate(isStartDate: true),
                       icon: const Icon(Icons.calendar_today),
                       label: Text(
-                        '${context.l10n.starts}: ${_startDate.toLocal().toString().split(' ')[0]}',
+                        '${context.l10n.starts}: ${_formatDisplayDate(context, _startDate)}',
                       ),
                     ),
                   ),
@@ -182,7 +191,7 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
                       label: Text(
                         _dueDate == null
                             ? context.l10n.setDueDate
-                            : '${context.l10n.due} ${_dueDate!.toLocal().toString().split(' ')[0]}',
+                            : '${context.l10n.due}: ${_formatDisplayDate(context, _dueDate!)}',
                       ),
                     ),
                   ),
