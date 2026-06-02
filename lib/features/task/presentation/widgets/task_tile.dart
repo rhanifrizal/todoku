@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:todoku/core/extensions/context_extensions.dart';
+import 'package:todoku/core/extensions/date_time_extensions.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
@@ -26,11 +26,6 @@ class TaskTile extends StatelessWidget {
       TaskPriority.medium => context.colorScheme.tertiary,
       TaskPriority.low => context.colorScheme.outline,
     };
-  }
-
-  String _formatDate(BuildContext context, DateTime date) {
-    final String locale = Localizations.localeOf(context).languageCode;
-    return DateFormat('d MMMM yyyy', locale).format(date.toLocal());
   }
 
   @override
@@ -188,7 +183,7 @@ class TaskTile extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '${context.l10n.starts}: ${_formatDate(context, task.dateStart)}',
+                          '${context.l10n.starts}: ${task.dateStart.toDisplayFormat(context)}',
                           style: context.textTheme.bodySmall?.copyWith(
                             color: context.colorScheme.outline,
                           ),
@@ -208,7 +203,7 @@ class TaskTile extends StatelessWidget {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '${context.l10n.due}: ${_formatDate(context, task.dueDate!)}',
+                            '${context.l10n.due}: ${task.dueDate?.toDisplayFormat(context)}',
                             style: context.textTheme.bodySmall?.copyWith(
                               color: isOverdue
                                   ? context.colorScheme.error

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:todoku/core/extensions/context_extensions.dart';
+import 'package:todoku/core/extensions/date_time_extensions.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
@@ -45,11 +45,6 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
     _titleController.dispose();
     _descriptionController.dispose();
     super.dispose();
-  }
-
-  String _formatDisplayDate(BuildContext context, DateTime date) {
-    final String locale = Localizations.localeOf(context).languageCode;
-    return DateFormat("d MMMM yyyy", locale).format(date.toLocal());
   }
 
   Future<void> _pickDate({required bool isStartDate}) async {
@@ -176,7 +171,7 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
                       onPressed: () => _pickDate(isStartDate: true),
                       icon: const Icon(Icons.calendar_today),
                       label: Text(
-                        '${context.l10n.starts}: ${_formatDisplayDate(context, _startDate)}',
+                        '${context.l10n.starts}: ${_startDate.toDisplayFormat(context)}',
                       ),
                     ),
                   ),
@@ -188,7 +183,7 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
                       label: Text(
                         _dueDate == null
                             ? context.l10n.setDueDate
-                            : '${context.l10n.due}: ${_formatDisplayDate(context, _dueDate!)}',
+                            : '${context.l10n.due}: ${_dueDate?.toDisplayFormat(context)}',
                       ),
                     ),
                   ),
