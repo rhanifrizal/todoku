@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todoku/core/localization/l10n_extensions.dart';
+import 'package:todoku/core/localization/l10n_extension.dart';
 
 class ThemeSwitchTile extends StatelessWidget {
   final ThemeMode themeMode;

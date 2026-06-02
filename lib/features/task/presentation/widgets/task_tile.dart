@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:todoku/core/localization/l10n_extensions.dart';
+import 'package:todoku/app/theme/theme_extension.dart';
+import 'package:todoku/core/localization/l10n_extension.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
@@ -21,11 +22,10 @@ class TaskTile extends StatelessWidget {
   }
 
   Color _getPriorityColor(BuildContext context, TaskPriority priority) {
-    final theme = Theme.of(context);
     return switch (priority) {
-      TaskPriority.high => theme.colorScheme.error,
-      TaskPriority.medium => theme.colorScheme.tertiary,
-      TaskPriority.low => theme.colorScheme.outline,
+      TaskPriority.high => context.colorScheme.error,
+      TaskPriority.medium => context.colorScheme.tertiary,
+      TaskPriority.low => context.colorScheme.outline,
     };
   }
 
@@ -36,7 +36,6 @@ class TaskTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final priorityColor = _getPriorityColor(context, task.priority);
     final localizedPriority = _getLocalizedPriority(context, task.priority);
 
@@ -102,26 +101,26 @@ class TaskTile extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
-          color: theme.colorScheme.primaryContainer,
+          color: context.colorScheme.primaryContainer,
           borderRadius: BorderRadius.circular(12),
         ),
         alignment: Alignment.centerLeft,
         child: Icon(
           task.isCompleted ? Icons.undo : Icons.check_circle_outline,
-          color: theme.colorScheme.onPrimaryContainer,
+          color: context.colorScheme.onPrimaryContainer,
         ),
       ),
       secondaryBackground: Container(
         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
-          color: theme.colorScheme.errorContainer,
+          color: context.colorScheme.errorContainer,
           borderRadius: BorderRadius.circular(12),
         ),
         alignment: Alignment.centerRight,
         child: Icon(
           Icons.delete_outline,
-          color: theme.colorScheme.onErrorContainer,
+          color: context.colorScheme.onErrorContainer,
         ),
       ),
       child: Card(
@@ -152,7 +151,7 @@ class TaskTile extends StatelessWidget {
                   ),
                   child: Text(
                     localizedPriority.toUpperCase(),
-                    style: theme.textTheme.labelSmall?.copyWith(
+                    style: context.textTheme.labelSmall?.copyWith(
                       color: priorityColor,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.5,
@@ -168,8 +167,8 @@ class TaskTile extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     task.description,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      color: context.colorScheme.onSurfaceVariant,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -186,13 +185,13 @@ class TaskTile extends StatelessWidget {
                         Icon(
                           Icons.calendar_today,
                           size: 12,
-                          color: theme.colorScheme.outline,
+                          color: context.colorScheme.outline,
                         ),
                         const SizedBox(width: 4),
                         Text(
                           '${context.l10n.starts}: ${_formatDate(context, task.dateStart)}',
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.outline,
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: context.colorScheme.outline,
                           ),
                         ),
                       ],
@@ -205,16 +204,16 @@ class TaskTile extends StatelessWidget {
                             Icons.event,
                             size: 12,
                             color: isOverdue
-                                ? theme.colorScheme.error
-                                : theme.colorScheme.outline,
+                                ? context.colorScheme.error
+                                : context.colorScheme.outline,
                           ),
                           const SizedBox(width: 4),
                           Text(
                             '${context.l10n.due}: ${_formatDate(context, task.dueDate!)}',
-                            style: theme.textTheme.bodySmall?.copyWith(
+                            style: context.textTheme.bodySmall?.copyWith(
                               color: isOverdue
-                                  ? theme.colorScheme.error
-                                  : theme.colorScheme.outline,
+                                  ? context.colorScheme.error
+                                  : context.colorScheme.outline,
                               fontWeight: isOverdue ? FontWeight.bold : null,
                             ),
                           ),

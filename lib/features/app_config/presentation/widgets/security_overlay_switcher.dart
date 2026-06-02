@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:todoku/core/localization/l10n_extensions.dart';
+import 'package:todoku/core/localization/l10n_extension.dart';
 
 class SecurityOverlaySwitcher extends StatefulWidget {
   final Widget child;

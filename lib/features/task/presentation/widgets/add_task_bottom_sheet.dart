@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:todoku/core/localization/l10n_extensions.dart';
+import 'package:todoku/app/theme/theme_extension.dart';
+import 'package:todoku/core/localization/l10n_extension.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
@@ -11,7 +12,7 @@ void showAddTaskSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
-    backgroundColor: Theme.of(context).colorScheme.surface,
+    backgroundColor: context.colorScheme.surface,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
@@ -116,9 +117,9 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
             children: [
               Text(
                 context.l10n.createNewTask,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: context.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: elementSpacing),
               TextFormField(
@@ -144,10 +145,7 @@ class _AddTaskBottomSheetBodyState extends State<AddTaskBottomSheetBody> {
                 ),
               ),
               const SizedBox(height: elementSpacing),
-              Text(
-                context.l10n.priority,
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
+              Text(context.l10n.priority, style: context.textTheme.bodyLarge),
               const SizedBox(height: 6),
               Row(
                 children: TaskPriority.values.map((priority) {

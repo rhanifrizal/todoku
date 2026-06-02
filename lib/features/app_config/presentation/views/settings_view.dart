@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todoku/core/localization/l10n_extensions.dart';
+import 'package:todoku/core/localization/l10n_extension.dart';
 import 'package:todoku/features/app_config/presentation/widgets/language_selector.dart';
 import 'package:todoku/features/app_config/presentation/widgets/theme_switch_tile.dart';
 

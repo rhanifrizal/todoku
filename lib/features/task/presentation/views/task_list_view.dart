@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todoku/core/localization/l10n_extensions.dart';
+import 'package:todoku/app/theme/theme_extension.dart';
+import 'package:todoku/core/localization/l10n_extension.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 import 'package:todoku/features/task/presentation/widgets/empty_state_widget.dart';
 import 'package:todoku/features/task/presentation/widgets/task_tile.dart';
@@ -113,8 +114,8 @@ class TaskListView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Text(
         title,
-        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-          color: Theme.of(context).colorScheme.primary,
+        style: context.textTheme.titleSmall?.copyWith(
+          color: context.colorScheme.primary,
           fontWeight: FontWeight.bold,
           letterSpacing: 0.5,
         ),

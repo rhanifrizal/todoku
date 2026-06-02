@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todoku/core/localization/l10n_extensions.dart';
+import 'package:todoku/app/theme/theme_extension.dart';
+import 'package:todoku/core/localization/l10n_extension.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   final bool isCompletedTasksSection;
@@ -8,8 +9,6 @@ class EmptyStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Center(
       child: TweenAnimationBuilder<double>(
         tween: Tween<double>(begin: 0.0, end: 1.0),
@@ -31,10 +30,10 @@ class EmptyStateWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   color: isCompletedTasksSection
-                      ? theme.colorScheme.surfaceContainerHighest.withValues(
+                      ? context.colorScheme.surfaceContainerHighest.withValues(
                           alpha: 0.3,
                         )
-                      : theme.colorScheme.primaryContainer.withValues(
+                      : context.colorScheme.primaryContainer.withValues(
                           alpha: 0.2,
                         ),
                   shape: BoxShape.circle,
@@ -45,8 +44,8 @@ class EmptyStateWidget extends StatelessWidget {
                       : Icons.assignment_outlined,
                   size: 64,
                   color: isCompletedTasksSection
-                      ? theme.colorScheme.outline
-                      : theme.colorScheme.primary,
+                      ? context.colorScheme.outline
+                      : context.colorScheme.primary,
                 ),
               ),
               const SizedBox(height: 24),
@@ -55,9 +54,9 @@ class EmptyStateWidget extends StatelessWidget {
                     ? context.l10n.noCompletedTasksYet
                     : context.l10n.allDoneForNow,
                 textAlign: TextAlign.center,
-                style: theme.textTheme.titleLarge?.copyWith(
+                style: context.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: theme.colorScheme.onSurface,
+                  color: context.colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 8),
@@ -66,8 +65,8 @@ class EmptyStateWidget extends StatelessWidget {
                     ? context.l10n.completeYourTaskRightNow
                     : context.l10n.createANewTaskRightNow,
                 textAlign: TextAlign.center,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                style: context.textTheme.bodyMedium?.copyWith(
+                  color: context.colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
