@@ -7,10 +7,10 @@ part 'task_model.g.dart';
 class TaskModel extends TaskEntity {
   @JsonKey(name: "id")
   @override
-  final String id;
+  String get id => super.id;
 
   const TaskModel({
-    required this.id,
+    required super.id,
     required super.title,
     required super.description,
     required super.isCompleted,
@@ -20,7 +20,7 @@ class TaskModel extends TaskEntity {
     super.category,
     required super.priority,
     super.groupId,
-  }) : super(id: id);
+  });
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>
       _$TaskModelFromJson(json);

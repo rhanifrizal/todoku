@@ -1,0 +1,10 @@
+{
+  "appTitle": "TodoKu",
+  "noTaskFoundCreateOne": "Tiada tugasan ditemui. Cipta satu!",
+  "newTask": "Tugasan Baharu",
+  "title": "Tajuk",
+  "description": "Keterangan",
+  "cancel": "Batal",
+  "save": "Simpan",
+  "routePathNotFound": "Laluan navigasi tidak ditemui: {path}"
+}

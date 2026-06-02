@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoku/core/localization/l10n_extensions.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
@@ -12,25 +13,27 @@ void showAddTaskDialog(BuildContext blocContext) {
     context: blocContext,
     builder: (dialogContext) {
       return AlertDialog(
-        title: const Text('New Task'),
+        title: Text(blocContext.l10n.newTask),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: titleController,
-              decoration: const InputDecoration(labelText: 'Title'),
+              decoration: InputDecoration(labelText: blocContext.l10n.title),
               autofocus: true,
             ),
             TextField(
               controller: descController,
-              decoration: const InputDecoration(labelText: 'Description'),
+              decoration: InputDecoration(
+                labelText: blocContext.l10n.description,
+              ),
             ),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Cancel'),
+            child: Text(blocContext.l10n.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -50,7 +53,7 @@ void showAddTaskDialog(BuildContext blocContext) {
               blocContext.read<TaskBloc>().add(CreateTaskEvent(newTask));
               Navigator.pop(dialogContext);
             },
-            child: const Text('Save'),
+            child: Text(blocContext.l10n.save),
           ),
         ],
       );

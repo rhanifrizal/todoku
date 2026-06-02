@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:todoku/core/localization/l10n_extensions.dart';
 
 class SecurityOverlaySwitcher extends StatefulWidget {
   final Widget child;
@@ -51,14 +52,14 @@ class _SecurityOverlaySwitcherState extends State<SecurityOverlaySwitcher> {
               filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
               child: Container(
                 color: Colors.black.withValues(alpha: 0.15),
-                child: const Center(
+                child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.lock_outline, color: Colors.white, size: 48),
                       SizedBox(height: 12),
                       Text(
-                        'TodoKu Tasks',
+                        context.l10n.appTitle,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,

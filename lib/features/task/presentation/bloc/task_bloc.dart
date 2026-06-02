@@ -1,27 +1,27 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todoku/core/usecases/usecase.dart';
-import 'package:todoku/features/task/domain/usecases/create_task.dart';
-import 'package:todoku/features/task/domain/usecases/delete_task.dart';
-import 'package:todoku/features/task/domain/usecases/get_tasks.dart';
-import 'package:todoku/features/task/domain/usecases/update_task.dart';
+import 'package:todoku/features/task/domain/usecases/create_task_usecase.dart';
+import 'package:todoku/features/task/domain/usecases/delete_task_usecase.dart';
+import 'package:todoku/features/task/domain/usecases/get_tasks_usecase.dart';
+import 'package:todoku/features/task/domain/usecases/update_task_usecase.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
 import 'package:todoku/features/task/presentation/bloc/task_state.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
-  final GetTasks _getTasks;
-  final CreateTask _createTask;
-  final UpdateTask _updateTask;
-  final DeleteTask _deleteTask;
+  final GetTasksUsecase _getTasksUsecase;
+  final CreateTaskUsecase _createTaskUsecase;
+  final UpdateTaskUsecase _updateTaskUsecase;
+  final DeleteTaskUsecase _deleteTaskUsecase;
 
   TaskBloc({
-    required GetTasks getTasks,
-    required CreateTask createTask,
-    required UpdateTask updateTask,
-    required DeleteTask deleteTask,
-  }) : _getTasks = getTasks,
-       _createTask = createTask,
-       _updateTask = updateTask,
-       _deleteTask = deleteTask,
+    required GetTasksUsecase getTasksUsecase,
+    required CreateTaskUsecase createTaskUsecase,
+    required UpdateTaskUsecase updateTaskUsecase,
+    required DeleteTaskUsecase deleteTaskUsecase,
+  }) : _getTasksUsecase = getTasksUsecase,
+       _createTaskUsecase = createTaskUsecase,
+       _updateTaskUsecase = updateTaskUsecase,
+       _deleteTaskUsecase = deleteTaskUsecase,
        super(const TaskInitialState()) {
     on<LoadTasksEvent>(_onLoadTasks);
     on<CreateTaskEvent>(_onCreateTask);
@@ -34,7 +34,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     Emitter<TaskState> emit,
   ) async {
     emit(const TaskLoadingState());
-    final (failure, tasks) = await _getTasks(const NoParams());
+    final (failure, tasks) = await _getTasksUsecase(const NoParams());
 
     if (failure != null) {
       emit(TaskFailureState(errorMessage: failure.message));
@@ -48,7 +48,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     Emitter<TaskState> emit,
   ) async {
     emit(const TaskLoadingState());
-    final (failure, _) = await _createTask(event.task);
+    final (failure, _) = await _createTaskUsecase(event.task);
 
     if (failure != null) {
       emit(TaskFailureState(errorMessage: failure.message));
@@ -61,7 +61,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     UpdateTaskEvent event,
     Emitter<TaskState> emit,
   ) async {
-    final (failure, _) = await _updateTask(event.task);
+    final (failure, _) = await _updateTaskUsecase(event.task);
 
     if (failure != null) {
       emit(TaskFailureState(errorMessage: failure.message));
@@ -75,7 +75,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     Emitter<TaskState> emit,
   ) async {
     emit(const TaskLoadingState());
-    final (failure, _) = await _deleteTask(event.id);
+    final (failure, _) = await _deleteTaskUsecase(event.id);
 
     if (failure != null) {
       emit(TaskFailureState(errorMessage: failure.message));

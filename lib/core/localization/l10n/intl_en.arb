@@ -1,0 +1,10 @@
+{
+  "appTitle": "TodoKu",
+  "noTaskFoundCreateOne": "No tasks found. Create one!",
+  "newTask": "New Task",
+  "title": "Title",
+  "description": "Description",
+  "cancel": "Cancel",
+  "save": "Save",
+  "routePathNotFound": "Route path not found: {path}"
+}

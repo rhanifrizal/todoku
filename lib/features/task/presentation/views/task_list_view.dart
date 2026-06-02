@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todoku/core/localization/l10n_extensions.dart';
 import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_state.dart';
 import 'package:todoku/features/task/presentation/widgets/task_tile.dart';
@@ -23,7 +24,7 @@ class TaskListView extends StatelessWidget {
           ),
           TaskSuccessState(tasks: final taskList) =>
             taskList.isEmpty
-                ? const Center(child: Text('No tasks found. Create one!'))
+                ? Center(child: Text(context.l10n.noTaskFoundCreateOne))
                 : ListView.builder(
                     itemCount: taskList.length,
                     padding: const EdgeInsets.symmetric(
