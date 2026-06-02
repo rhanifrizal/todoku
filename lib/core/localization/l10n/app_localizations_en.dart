@@ -62,4 +62,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get malay => 'Bahasa Melayu';
+
+  @override
+  String get createNewTask => 'Create New Task';
+
+  @override
+  String get taskTitle => 'Task Title';
+
+  @override
+  String get titleIsRequired => 'Title is required';
+
+  @override
+  String get priority => 'Priority';
+
+  @override
+  String get low => 'Low';
+
+  @override
+  String get medium => 'Medium';
+
+  @override
+  String get high => 'High';
+
+  @override
+  String get starts => 'Starts';
+
+  @override
+  String get setDueDate => 'Set Due Date';
+
+  @override
+  String get due => 'Due';
+
+  @override
+  String get saveTask => 'Save Task';
 }

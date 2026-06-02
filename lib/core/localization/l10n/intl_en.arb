@@ -15,5 +15,16 @@
   "themeDark": "Dark",
   "language": "Language",
   "english": "English",
-  "malay": "Bahasa Melayu"
+  "malay": "Bahasa Melayu",
+  "createNewTask": "Create New Task",
+  "taskTitle": "Task Title",
+  "titleIsRequired": "Title is required",
+  "priority": "Priority",
+  "low": "Low",
+  "medium": "Medium",
+  "high": "High",
+  "starts": "Starts",
+  "setDueDate": "Set Due Date",
+  "due": "Due",
+  "saveTask": "Save Task"
 }

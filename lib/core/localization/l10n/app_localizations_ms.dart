@@ -62,4 +62,37 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get malay => 'Bahasa Melayu';
+
+  @override
+  String get createNewTask => 'Cipta Tugas Baru';
+
+  @override
+  String get taskTitle => 'Tajuk Tugas';
+
+  @override
+  String get titleIsRequired => 'Tajuk wajib diisi';
+
+  @override
+  String get priority => 'Keutamaan';
+
+  @override
+  String get low => 'Rendah';
+
+  @override
+  String get medium => 'Sederhana';
+
+  @override
+  String get high => 'Tinggi';
+
+  @override
+  String get starts => 'Mula';
+
+  @override
+  String get setDueDate => 'Tetapkan Tarikh Akhir';
+
+  @override
+  String get due => 'Tamat';
+
+  @override
+  String get saveTask => 'Simpan Tugas';
 }

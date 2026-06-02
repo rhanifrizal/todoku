@@ -16,5 +16,16 @@
   "themeDark": "Gelap",
   "language": "Bahasa",
   "english": "English",
-  "malay": "Bahasa Melayu"
+  "malay": "Bahasa Melayu",
+  "createNewTask": "Cipta Tugas Baru",
+  "taskTitle": "Tajuk Tugas",
+  "titleIsRequired": "Tajuk wajib diisi",
+  "priority": "Keutamaan",
+  "low": "Rendah",
+  "medium": "Sederhana",
+  "high": "Tinggi",
+  "starts": "Mula",
+  "setDueDate": "Tetapkan Tarikh Akhir",
+  "due": "Tamat",
+  "saveTask": "Simpan Tugas"
 }
