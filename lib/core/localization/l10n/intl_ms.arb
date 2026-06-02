@@ -8,7 +8,6 @@
   "save": "Simpan",
   "routePathNotFound": "Laluan navigasi tidak ditemui: {path}",
   "settings": "Tetapan",
-  "darkMode": "Mod Gelap",
   "theme": "Tema",
   "currentTheme": "Semasa: {mode}",
   "themeSystem": "Sistem",
@@ -27,5 +26,7 @@
   "starts": "Mula",
   "setDueDate": "Tetapkan Tarikh Akhir",
   "due": "Tamat",
-  "saveTask": "Simpan Tugas"
+  "saveTask": "Simpan Tugas",
+  "todoList": "Senarai Tugasan",
+  "completedTasks": "Tugasan Selesai"
 }

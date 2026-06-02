@@ -95,4 +95,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saveTask => 'Save Task';
+
+  @override
+  String get todoList => 'To do List';
+
+  @override
+  String get completedTasks => 'Completed Task';
 }

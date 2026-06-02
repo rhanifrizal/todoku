@@ -26,5 +26,7 @@
   "starts": "Starts",
   "setDueDate": "Set Due Date",
   "due": "Due",
-  "saveTask": "Save Task"
+  "saveTask": "Save Task",
+  "todoList": "To do List",
+  "completedTasks": "Completed Task"
 }

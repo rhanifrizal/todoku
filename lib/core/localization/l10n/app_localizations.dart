@@ -265,6 +265,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save Task'**
   String get saveTask;
+
+  /// No description provided for @todoList.
+  ///
+  /// In en, this message translates to:
+  /// **'To do List'**
+  String get todoList;
+
+  /// No description provided for @completedTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed Task'**
+  String get completedTasks;
 }
 
 class _AppLocalizationsDelegate

@@ -95,4 +95,10 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get saveTask => 'Simpan Tugas';
+
+  @override
+  String get todoList => 'Senarai Tugasan';
+
+  @override
+  String get completedTasks => 'Tugasan Selesai';
 }
