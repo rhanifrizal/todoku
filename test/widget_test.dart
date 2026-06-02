@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:todoku/main.dart';
+import 'package:todoku/app/app.dart';
 
 void main() {
   setUp(() async {

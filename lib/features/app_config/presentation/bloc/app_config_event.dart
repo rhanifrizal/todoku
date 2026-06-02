@@ -20,3 +20,7 @@ final class ChangeLanguageEvent extends AppConfigEvent {
   @override
   List<Object?> get props => [locale];
 }
+
+final class InitConfigEvent extends AppConfigEvent {
+  const InitConfigEvent();
+}

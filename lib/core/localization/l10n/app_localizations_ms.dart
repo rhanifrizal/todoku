@@ -28,4 +28,9 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get save => 'Simpan';
+
+  @override
+  String routePathNotFound(Object path) {
+    return 'Laluan navigasi tidak ditemui: $path';
+  }
 }

@@ -28,4 +28,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get save => 'Save';
+
+  @override
+  String routePathNotFound(Object path) {
+    return 'Route path not found: $path';
+  }
 }

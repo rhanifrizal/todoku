@@ -139,6 +139,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get save;
+
+  /// No description provided for @routePathNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Route path not found: {path}'**
+  String routePathNotFound(Object path);
 }
 
 class _AppLocalizationsDelegate
