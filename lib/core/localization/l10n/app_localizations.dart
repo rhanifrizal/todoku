@@ -145,6 +145,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Route path not found: {path}'**
   String routePathNotFound(Object path);
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// No description provided for @currentTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Current: {theme}'**
+  String currentTheme(String theme);
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @malay.
+  ///
+  /// In en, this message translates to:
+  /// **'Bahasa Melayu'**
+  String get malay;
 }
 
 class _AppLocalizationsDelegate

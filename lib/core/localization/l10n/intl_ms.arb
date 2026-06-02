@@ -6,5 +6,18 @@
   "description": "Keterangan",
   "cancel": "Batal",
   "save": "Simpan",
-  "routePathNotFound": "Laluan navigasi tidak ditemui: {path}"
+  "routePathNotFound": "Laluan navigasi tidak ditemui: {path}",
+  "settings": "Tetapan",
+  "darkMode": "Mod Gelap",
+  "currentTheme": "Semasa: {theme}",
+  "@currentTheme": {
+    "placeholders": {
+      "theme": {
+        "type": "String"
+      }
+    }
+  },
+  "language": "Bahasa",
+  "english": "English",
+  "malay": "Bahasa Melayu"
 }

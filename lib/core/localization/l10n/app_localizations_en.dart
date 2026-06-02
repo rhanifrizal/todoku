@@ -33,4 +33,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String routePathNotFound(Object path) {
     return 'Route path not found: $path';
   }
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String currentTheme(String theme) {
+    return 'Current: $theme';
+  }
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get malay => 'Bahasa Melayu';
 }

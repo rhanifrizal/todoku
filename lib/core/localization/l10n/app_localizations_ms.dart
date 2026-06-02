@@ -33,4 +33,24 @@ class AppLocalizationsMs extends AppLocalizations {
   String routePathNotFound(Object path) {
     return 'Laluan navigasi tidak ditemui: $path';
   }
+
+  @override
+  String get settings => 'Tetapan';
+
+  @override
+  String get darkMode => 'Mod Gelap';
+
+  @override
+  String currentTheme(String theme) {
+    return 'Semasa: $theme';
+  }
+
+  @override
+  String get language => 'Bahasa';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get malay => 'Bahasa Melayu';
 }
