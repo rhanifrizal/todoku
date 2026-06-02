@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todoku/app/theme/theme_extension.dart';
-import 'package:todoku/core/localization/l10n_extension.dart';
+import 'package:todoku/core/extensions/context_extensions.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 import 'package:todoku/features/task/presentation/widgets/empty_state_widget.dart';
 import 'package:todoku/features/task/presentation/widgets/task_tile.dart';

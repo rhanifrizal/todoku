@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todoku/core/localization/l10n_extension.dart';
+import 'package:todoku/core/extensions/context_extensions.dart';
 
 class LanguageSelector extends StatelessWidget {
   final Locale currentLocale;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:todoku/core/localization/l10n_extension.dart';
+import 'package:todoku/core/extensions/context_extensions.dart';
 import 'package:todoku/features/app_config/presentation/screens/settings_screen.dart';
 import 'package:todoku/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:todoku/features/task/presentation/screens/task_list_screen.dart';

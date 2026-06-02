@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todoku/app/theme/theme_extension.dart';
-import 'package:todoku/core/localization/l10n_extension.dart';
-
+import 'package:todoku/core/extensions/context_extensions.dart';
 class EmptyStateWidget extends StatelessWidget {
   final bool isCompletedTasksSection;
 
