@@ -19,6 +19,14 @@ final class TaskLocalDataSourceImpl implements TaskLocalDataSource {
     final rows = await query.get();
 
     return rows.map((row) {
+      TaskPriority mappedPriority;
+
+      try {
+        mappedPriority = TaskPriority.values.byName(row.priority);
+      } catch (_) {
+        mappedPriority = TaskPriority.low;
+      }
+
       return TaskModel(
         id: row.id,
         title: row.title,
@@ -28,7 +36,7 @@ final class TaskLocalDataSourceImpl implements TaskLocalDataSource {
         dueDate: row.dueDate,
         tags: row.tags,
         category: row.category,
-        priority: TaskPriority.values.byName(row.priority),
+        priority: mappedPriority,
         groupId: row.groupId,
       );
     }).toList();

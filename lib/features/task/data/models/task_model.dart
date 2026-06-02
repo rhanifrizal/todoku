@@ -5,10 +5,6 @@ part 'task_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class TaskModel extends TaskEntity {
-  @JsonKey(name: "id")
-  @override
-  String get id => super.id;
-
   const TaskModel({
     required super.id,
     required super.title,
