@@ -33,7 +33,7 @@ class TaskListScreen extends StatelessWidget {
             return TaskListView(
               isLoading: state.isLoading && state.taskList.isEmpty,
               errorMessage: state.taskList.isEmpty ? state.errorMessage : null,
-              tasksList: state.taskList,
+              taskList: state.taskList,
               onAddTaskPressed: () => showAddTaskSheet(blocContext),
             );
           },

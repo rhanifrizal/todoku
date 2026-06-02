@@ -89,29 +89,15 @@ class TaskTile extends StatelessWidget {
         elevation: 1,
         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
           child: ListTile(
             isThreeLine: task.description.isNotEmpty,
-            leading: Checkbox(
-              value: task.isCompleted,
-              onChanged: (bool? newValue) {
-                final updatedTask = task.copyWith(
-                  isCompleted: newValue ?? false,
-                );
-                context.read<TaskBloc>().add(UpdateTaskEvent(updatedTask));
-              },
-            ),
             title: Row(
               children: [
                 Expanded(
                   child: Text(
                     task.title,
-                    style: TextStyle(
-                      decoration: task.isCompleted
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ),
                 const SizedBox(width: 8),
