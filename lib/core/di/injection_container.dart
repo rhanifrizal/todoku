@@ -34,7 +34,9 @@ Future<void> initInjection() async {
   );
 
   // Secure Drift/SQLCipher abstraction database framework instance
-  sl.registerLazySingleton<SecureDatabase>(() => SecureDatabase(sl()));
+  sl.registerLazySingleton<SecureDatabase>(
+    () => SecureDatabase(storageHelper: sl()),
+  );
 
   // Data Sources Layer
   sl.registerLazySingleton<TaskLocalDataSource>(

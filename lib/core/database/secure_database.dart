@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import 'package:todoku/core/database/tables/tasks_table.dart';
+import 'package:todoku/core/utils/secure_storage_helper.dart';
 
 part 'secure_database.g.dart';
 
@@ -13,24 +14,25 @@ part 'secure_database.g.dart';
 class SecureDatabase extends _$SecureDatabase {
   static const String _dbKeyName = "SQLCIPHER_PASSPHRASE";
 
-  SecureDatabase(FlutterSecureStorage secureStorage)
-    : super(_openConnection(secureStorage));
+  SecureDatabase({required SecureStorageHelper storageHelper})
+    : super(_openConnection(storageHelper));
 
   @override
   int get schemaVersion => 1;
 
-  static QueryExecutor _openConnection(FlutterSecureStorage secureStorage) {
+  static QueryExecutor _openConnection(SecureStorageHelper storageHelper) {
     return LazyDatabase(() async {
-      String? passphrase = await secureStorage.read(key: _dbKeyName);
+      String? passphrase = await storageHelper.read(_dbKeyName);
+
       if (passphrase == null) {
-        final randomBytes = List<int>.generate(
-          32,
-          (i) => (i + DateTime.now().millisecond) % 256,
-        );
-        passphrase = randomBytes
+        final secureRandom = Random.secure();
+        final values = List<int>.generate(32, (i) => secureRandom.nextInt(256));
+
+        passphrase = values
             .map((b) => b.toRadixString(16).padLeft(2, '0'))
             .join();
-        await secureStorage.write(key: _dbKeyName, value: passphrase);
+
+        await storageHelper.write(_dbKeyName, passphrase);
       }
 
       final dbFolder = await getApplicationDocumentsDirectory();
