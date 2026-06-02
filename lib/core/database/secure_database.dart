@@ -41,9 +41,9 @@ class SecureDatabase extends _$SecureDatabase {
       return NativeDatabase.createInBackground(
         file,
         setup: (rawDb) {
+          rawDb.execute("PRAGMA key = '$passphrase';");
           rawDb.execute("PRAGMA cipher = 'sqlcipher';");
           rawDb.execute("PRAGMA legacy = 4;");
-          rawDb.execute("PRAGMA key = '$passphrase';");
         },
       );
     });
@@ -54,8 +54,14 @@ class ListStringConverter extends TypeConverter<List<String>, String> {
   const ListStringConverter();
 
   @override
-  List<String> fromSql(String fromDb) =>
-      List<String>.from(json.decode(fromDb) as List);
+  List<String> fromSql(String fromDb) {
+    if (fromDb.isEmpty || fromDb == 'null') return const [];
+    try {
+      return List<String>.from(json.decode(fromDb) as List);
+    } catch (_) {
+      return const [];
+    }
+  }
 
   @override
   String toSql(List<String> value) => json.encode(value);
