@@ -14,15 +14,30 @@ class TaskListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<TaskBloc>(
       create: (context) => sl<TaskBloc>()..add(const LoadTasksEvent()),
-      child: BlocBuilder<TaskBloc, TaskState>(
-        builder: (blocContext, state) {
-          return TaskListView(
-            isLoading: state is TaskInitialState || state is TaskLoadingState,
-            errorMessage: state is TaskFailureState ? state.errorMessage : null,
-            tasksList: state is TaskSuccessState ? state.tasksList : const [],
-            onAddTaskPressed: () => showAddTaskDialog(blocContext),
-          );
+      child: BlocListener<TaskBloc, TaskState>(
+        listenWhen: (previous, current) =>
+            current.isFailure && current.taskList.isNotEmpty,
+        listener: (context, state) {
+          if (state.errorMessage != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage!),
+                backgroundColor: Theme.of(context).colorScheme.error,
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+          }
         },
+        child: BlocBuilder<TaskBloc, TaskState>(
+          builder: (blocContext, state) {
+            return TaskListView(
+              isLoading: state.isLoading && state.taskList.isEmpty,
+              errorMessage: state.taskList.isEmpty ? state.errorMessage : null,
+              tasksList: state.taskList,
+              onAddTaskPressed: () => showAddTaskDialog(blocContext),
+            );
+          },
+        ),
       ),
     );
   }

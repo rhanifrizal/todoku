@@ -22,7 +22,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
        _createTaskUsecase = createTaskUsecase,
        _updateTaskUsecase = updateTaskUsecase,
        _deleteTaskUsecase = deleteTaskUsecase,
-       super(const TaskInitialState()) {
+       super(const TaskState()) {
     on<LoadTasksEvent>(_onLoadTasks);
     on<CreateTaskEvent>(_onCreateTask);
     on<UpdateTaskEvent>(_onUpdateTask);
@@ -33,13 +33,24 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     LoadTasksEvent event,
     Emitter<TaskState> emit,
   ) async {
-    emit(const TaskLoadingState());
-    final (failure, tasksList) = await _getTasksUsecase(const NoParams());
+    emit(state.copyWith(status: TaskStatus.loading, errorMessage: () => null));
+    final (failure, taskList) = await _getTasksUsecase(const NoParams());
 
     if (failure != null) {
-      emit(TaskFailureState(errorMessage: failure.message));
-    } else if (tasksList != null) {
-      emit(TaskSuccessState(tasksList: tasksList));
+      emit(
+        state.copyWith(
+          status: TaskStatus.failure,
+          errorMessage: () => failure.message,
+        ),
+      );
+    } else if (taskList != null) {
+      emit(
+        state.copyWith(
+          status: TaskStatus.success,
+          taskList: taskList,
+          errorMessage: () => null,
+        ),
+      );
     }
   }
 
@@ -47,11 +58,16 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     CreateTaskEvent event,
     Emitter<TaskState> emit,
   ) async {
-    emit(const TaskLoadingState());
+    emit(state.copyWith(status: TaskStatus.loading, errorMessage: () => null));
     final (failure, _) = await _createTaskUsecase(event.task);
 
     if (failure != null) {
-      emit(TaskFailureState(errorMessage: failure.message));
+      emit(
+        state.copyWith(
+          status: TaskStatus.failure,
+          errorMessage: () => failure.message,
+        ),
+      );
     } else {
       add(const LoadTasksEvent());
     }
@@ -64,7 +80,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     final (failure, _) = await _updateTaskUsecase(event.task);
 
     if (failure != null) {
-      emit(TaskFailureState(errorMessage: failure.message));
+      emit(
+        state.copyWith(
+          status: TaskStatus.failure,
+          errorMessage: () => failure.message,
+        ),
+      );
     } else {
       add(const LoadTasksEvent());
     }
@@ -74,11 +95,16 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     DeleteTaskEvent event,
     Emitter<TaskState> emit,
   ) async {
-    emit(const TaskLoadingState());
+    emit(state.copyWith(status: TaskStatus.loading, errorMessage: () => null));
     final (failure, _) = await _deleteTaskUsecase(event.id);
 
     if (failure != null) {
-      emit(TaskFailureState(errorMessage: failure.message));
+      emit(
+        state.copyWith(
+          status: TaskStatus.failure,
+          errorMessage: () => failure.message,
+        ),
+      );
     } else {
       add(const LoadTasksEvent());
     }
