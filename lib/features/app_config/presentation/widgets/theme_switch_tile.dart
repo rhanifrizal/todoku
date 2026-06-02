@@ -13,11 +13,15 @@ class ThemeSwitchTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayThemeName = themeMode.name.toUpperCase();
+    final String localizedModeName = switch (themeMode) {
+      ThemeMode.system => context.l10n.themeSystem,
+      ThemeMode.light => context.l10n.themeLight,
+      ThemeMode.dark => context.l10n.themeDark,
+    };
 
     return ListTile(
-      title: Text(context.l10n.darkMode),
-      subtitle: Text(context.l10n.currentTheme(displayThemeName)),
+      title: Text(context.l10n.theme),
+      subtitle: Text(context.l10n.currentTheme(localizedModeName)),
       trailing: Switch(
         value: themeMode == ThemeMode.dark,
         onChanged: onThemeChanged,
