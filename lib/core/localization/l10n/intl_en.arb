@@ -1,6 +1,5 @@
 {
   "appTitle": "TodoKu",
-  "noTaskFoundCreateOne": "No tasks found. Create one!",
   "newTask": "New Task",
   "title": "Title",
   "description": "Description",
@@ -28,5 +27,13 @@
   "due": "Due",
   "saveTask": "Save Task",
   "todoList": "To do List",
-  "completedTasks": "Completed Task"
+  "completedTasks": "Completed Task",
+  "taskMarkedAsCompleted": "Task Marked As Completed",
+  "taskMarkedAsIncomplete": "Task Marked As Incompleted",
+  "undo": "Undo",
+  "taskDeleted": "Task Deleted",
+  "noCompletedTasksYet": "No Completed Tasks Yet",
+  "allDoneForNow": "All Done For Now",
+  "completeYourTaskRightNow": "Complete Your Task Right Now!",
+  "createANewTaskRightNow": "Create a New Task Right Now!"
 }

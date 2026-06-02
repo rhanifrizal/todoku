@@ -104,12 +104,6 @@ abstract class AppLocalizations {
   /// **'TodoKu'**
   String get appTitle;
 
-  /// No description provided for @noTaskFoundCreateOne.
-  ///
-  /// In en, this message translates to:
-  /// **'No tasks found. Create one!'**
-  String get noTaskFoundCreateOne;
-
   /// No description provided for @newTask.
   ///
   /// In en, this message translates to:
@@ -277,6 +271,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Completed Task'**
   String get completedTasks;
+
+  /// No description provided for @taskMarkedAsCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Task Marked As Completed'**
+  String get taskMarkedAsCompleted;
+
+  /// No description provided for @taskMarkedAsIncomplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Task Marked As Incompleted'**
+  String get taskMarkedAsIncomplete;
+
+  /// No description provided for @undo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undo;
+
+  /// No description provided for @taskDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Task Deleted'**
+  String get taskDeleted;
+
+  /// No description provided for @noCompletedTasksYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No Completed Tasks Yet'**
+  String get noCompletedTasksYet;
+
+  /// No description provided for @allDoneForNow.
+  ///
+  /// In en, this message translates to:
+  /// **'All Done For Now'**
+  String get allDoneForNow;
+
+  /// No description provided for @completeYourTaskRightNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete Your Task Right Now!'**
+  String get completeYourTaskRightNow;
+
+  /// No description provided for @createANewTaskRightNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a New Task Right Now!'**
+  String get createANewTaskRightNow;
 }
 
 class _AppLocalizationsDelegate

@@ -12,9 +12,6 @@ class AppLocalizationsMs extends AppLocalizations {
   String get appTitle => 'TodoKu';
 
   @override
-  String get noTaskFoundCreateOne => 'Tiada tugasan ditemui. Cipta satu!';
-
-  @override
   String get newTask => 'Tugasan Baharu';
 
   @override
@@ -101,4 +98,28 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get completedTasks => 'Tugasan Selesai';
+
+  @override
+  String get taskMarkedAsCompleted => 'Tugasan Ditanda Sebagai Selesai';
+
+  @override
+  String get taskMarkedAsIncomplete => 'Tugasan Ditanda Sebagai Belum Selesai';
+
+  @override
+  String get undo => 'Buat Asal';
+
+  @override
+  String get taskDeleted => 'Tugasan Dipadam';
+
+  @override
+  String get noCompletedTasksYet => 'Tiada Tugasan Selesai Lagi';
+
+  @override
+  String get allDoneForNow => 'Semua Selesai Buat Masa Ini';
+
+  @override
+  String get completeYourTaskRightNow => 'Selesaikan Tugasan Anda Sekarang!';
+
+  @override
+  String get createANewTaskRightNow => 'Cipta Tugasan Baru Sekarang!';
 }

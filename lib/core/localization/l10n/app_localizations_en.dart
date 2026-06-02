@@ -12,9 +12,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'TodoKu';
 
   @override
-  String get noTaskFoundCreateOne => 'No tasks found. Create one!';
-
-  @override
   String get newTask => 'New Task';
 
   @override
@@ -101,4 +98,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get completedTasks => 'Completed Task';
+
+  @override
+  String get taskMarkedAsCompleted => 'Task Marked As Completed';
+
+  @override
+  String get taskMarkedAsIncomplete => 'Task Marked As Incompleted';
+
+  @override
+  String get undo => 'Undo';
+
+  @override
+  String get taskDeleted => 'Task Deleted';
+
+  @override
+  String get noCompletedTasksYet => 'No Completed Tasks Yet';
+
+  @override
+  String get allDoneForNow => 'All Done For Now';
+
+  @override
+  String get completeYourTaskRightNow => 'Complete Your Task Right Now!';
+
+  @override
+  String get createANewTaskRightNow => 'Create a New Task Right Now!';
 }

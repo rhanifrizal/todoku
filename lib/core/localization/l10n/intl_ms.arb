@@ -1,6 +1,5 @@
 {
   "appTitle": "TodoKu",
-  "noTaskFoundCreateOne": "Tiada tugasan ditemui. Cipta satu!",
   "newTask": "Tugasan Baharu",
   "title": "Tajuk",
   "description": "Keterangan",
@@ -28,5 +27,13 @@
   "due": "Tamat",
   "saveTask": "Simpan Tugas",
   "todoList": "Senarai Tugasan",
-  "completedTasks": "Tugasan Selesai"
+  "completedTasks": "Tugasan Selesai",
+  "taskMarkedAsCompleted": "Tugasan Ditanda Sebagai Selesai",
+  "taskMarkedAsIncomplete": "Tugasan Ditanda Sebagai Belum Selesai",
+  "undo": "Buat Asal",
+  "taskDeleted": "Tugasan Dipadam",
+  "noCompletedTasksYet": "Tiada Tugasan Selesai Lagi",
+  "allDoneForNow": "Semua Selesai Buat Masa Ini",
+  "completeYourTaskRightNow": "Selesaikan Tugasan Anda Sekarang!",
+  "createANewTaskRightNow": "Cipta Tugasan Baru Sekarang!"
 }
