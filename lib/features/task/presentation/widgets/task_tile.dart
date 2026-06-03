@@ -6,6 +6,7 @@ import 'package:todoku/core/extensions/date_time_extensions.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
+import 'package:todoku/features/task/presentation/widgets/edit_task_bottom_sheet.dart';
 
 class TaskTile extends StatelessWidget {
   final TaskEntity task;
@@ -120,129 +121,135 @@ class TaskTile extends StatelessWidget {
       child: Card(
         elevation: 1,
         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-          child: ListTile(
-            isThreeLine: task.description.isNotEmpty,
-            title: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    task.title,
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 2,
-                  ),
-                  decoration: BoxDecoration(
-                    color: priorityColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: priorityColor, width: 1),
-                  ),
-                  child: Text(
-                    localizedPriority.toUpperCase(),
-                    style: context.textTheme.labelSmall?.copyWith(
-                      color: priorityColor,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.5,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            showEditTaskSheet(context, task: task);
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+            child: ListTile(
+              isThreeLine: task.description.isNotEmpty,
+              title: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      task.title,
+                      style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
-                ),
-              ],
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (task.description.isNotEmpty) ...[
-                  const SizedBox(height: 4),
-                  Text(
-                    task.description,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: context.colorScheme.onSurfaceVariant,
+                  const SizedBox(width: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                    decoration: BoxDecoration(
+                      color: priorityColor.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(color: priorityColor, width: 1),
+                    ),
+                    child: Text(
+                      localizedPriority.toUpperCase(),
+                      style: context.textTheme.labelSmall?.copyWith(
+                        color: priorityColor,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
                   ),
                 ],
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 12,
-                  runSpacing: 4,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.calendar_today,
-                          size: 12,
-                          color: context.colorScheme.outline,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          '${context.l10n.starts}: ${task.dateStart.toDisplayFormat(context)}',
-                          style: context.textTheme.bodySmall?.copyWith(
-                            color: context.colorScheme.outline,
-                          ),
-                        ),
-                      ],
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (task.description.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      task.description,
+                      style: context.textTheme.bodyMedium?.copyWith(
+                        color: context.colorScheme.onSurfaceVariant,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    if (task.dueDate != null)
+                  ],
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 4,
+                    children: [
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
-                            Icons.event,
+                            Icons.calendar_today,
                             size: 12,
-                            color: isOverdue
-                                ? context.colorScheme.error
-                                : context.colorScheme.outline,
+                            color: context.colorScheme.outline,
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '${context.l10n.due}: ${task.dueDate?.toDisplayFormat(context)}',
+                            '${context.l10n.starts}: ${task.dateStart.toDisplayFormat(context)}',
                             style: context.textTheme.bodySmall?.copyWith(
-                              color: isOverdue
-                                  ? context.colorScheme.error
-                                  : context.colorScheme.outline,
-                              fontWeight: isOverdue ? FontWeight.bold : null,
+                              color: context.colorScheme.outline,
                             ),
                           ),
                         ],
                       ),
-                  ],
-                ),
-
-                if (task.tags.isNotEmpty) ...[
-                  const SizedBox(height: 10),
-                  Wrap(
-                    spacing: 6,
-                    runSpacing: 4,
-                    children: task.tags.map((tag) {
-                      return Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 2,
+                      if (task.dueDate != null)
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.event,
+                              size: 12,
+                              color: isOverdue
+                                  ? context.colorScheme.error
+                                  : context.colorScheme.outline,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              '${context.l10n.due}: ${task.dueDate?.toDisplayFormat(context)}',
+                              style: context.textTheme.bodySmall?.copyWith(
+                                color: isOverdue
+                                    ? context.colorScheme.error
+                                    : context.colorScheme.outline,
+                                fontWeight: isOverdue ? FontWeight.bold : null,
+                              ),
+                            ),
+                          ],
                         ),
-                        decoration: BoxDecoration(
-                          color: context.colorScheme.surfaceContainerHighest,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text(
-                          '#$tag',
-                          style: context.textTheme.labelSmall?.copyWith(
-                            color: context.colorScheme.onSurfaceVariant,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                    ],
                   ),
+
+                  if (task.tags.isNotEmpty) ...[
+                    const SizedBox(height: 10),
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 4,
+                      children: task.tags.map((tag) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: context.colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            '#$tag',
+                            style: context.textTheme.labelSmall?.copyWith(
+                              color: context.colorScheme.onSurfaceVariant,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
         ),

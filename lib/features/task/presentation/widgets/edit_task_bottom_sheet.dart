@@ -7,7 +7,7 @@ import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
 import 'package:todoku/features/task/presentation/widgets/task_form.dart';
 
-void showAddTaskSheet(BuildContext context) {
+void showEditTaskSheet(BuildContext context, {required TaskEntity task}) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -18,14 +18,16 @@ void showAddTaskSheet(BuildContext context) {
     builder: (bottomSheetContext) {
       return BlocProvider.value(
         value: BlocProvider.of<TaskBloc>(context),
-        child: const AddTaskBottomSheetBody(),
+        child: EditTaskBottomSheetBody(task: task),
       );
     },
   );
 }
 
-class AddTaskBottomSheetBody extends StatelessWidget {
-  const AddTaskBottomSheetBody({super.key});
+class EditTaskBottomSheetBody extends StatelessWidget {
+  final TaskEntity task;
+
+  const EditTaskBottomSheetBody({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
@@ -42,29 +44,26 @@ class AddTaskBottomSheetBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              context.l10n.createNewTask,
+              context.l10n.editTask,
               style: context.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
             TaskForm(
-              buttonLabel: context.l10n.saveTask,
+              initialTask: task,
+              buttonLabel: context.l10n.updateTask,
               onSubmit:
                   (title, description, priority, startDate, dueDate, tags) {
-                    final newTask = TaskEntity(
-                      id: DateTime.now().millisecondsSinceEpoch.toString(),
+                    final updatedTask = task.copyWith(
                       title: title,
                       description: description,
-                      isCompleted: false,
-                      dateStart: startDate,
-                      dueDate: dueDate,
-                      tags: tags,
                       priority: priority,
-                      category: null,
-                      groupId: null,
+                      dateStart: startDate,
+                      dueDate: () => dueDate,
+                      tags: tags,
                     );
-                    context.read<TaskBloc>().add(CreateTaskEvent(newTask));
+                    context.read<TaskBloc>().add(UpdateTaskEvent(updatedTask));
                     context.pop();
                   },
             ),

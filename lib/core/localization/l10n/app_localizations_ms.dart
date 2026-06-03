@@ -134,4 +134,10 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get tooManyTagsError => 'Anda boleh menambah maksimum 5 tag';
+
+  @override
+  String get editTask => 'Edit Tugasan';
+
+  @override
+  String get updateTask => 'Kemas Kini Tugasan';
 }

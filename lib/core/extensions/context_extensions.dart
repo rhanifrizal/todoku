@@ -22,4 +22,7 @@ extension AppContextExtension on BuildContext {
 
   /// Quick shortcut to check if keyboard is open/visible
   bool get isKeyboardOpen => MediaQuery.viewInsetsOf(this).bottom > 0;
+
+  /// Get the bottom view insets (typically used to check keyboard height)
+  double get bottomInsets => MediaQuery.viewInsetsOf(this).bottom;
 }

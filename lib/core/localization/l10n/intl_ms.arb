@@ -39,5 +39,7 @@
   "tagsLabel": "Tag (Dipisahkan Dengan Koma)",
   "tagsHint": "cth. Kerja, Peribadi, Membeli-belah",
   "tagTooLongError": "Tag individu tidak boleh melebihi 15 aksara",
-  "tooManyTagsError": "Anda boleh menambah maksimum 5 tag"
+  "tooManyTagsError": "Anda boleh menambah maksimum 5 tag",
+  "editTask": "Edit Tugasan",
+  "updateTask": "Kemas Kini Tugasan"
 }

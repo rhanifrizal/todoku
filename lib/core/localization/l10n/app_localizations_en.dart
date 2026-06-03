@@ -134,4 +134,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tooManyTagsError => 'You can add a maximum of 5 tags';
+
+  @override
+  String get editTask => 'Edit Task';
+
+  @override
+  String get updateTask => 'Update Task';
 }
