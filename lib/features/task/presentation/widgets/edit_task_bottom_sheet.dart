@@ -54,7 +54,15 @@ class EditTaskBottomSheetBody extends StatelessWidget {
               initialTask: task,
               buttonLabel: context.l10n.updateTask,
               onSubmit:
-                  (title, description, priority, startDate, dueDate, tags) {
+                  (
+                    title,
+                    description,
+                    priority,
+                    startDate,
+                    dueDate,
+                    tags,
+                    category,
+                  ) {
                     final updatedTask = task.copyWith(
                       title: title,
                       description: description,
@@ -62,6 +70,7 @@ class EditTaskBottomSheetBody extends StatelessWidget {
                       dateStart: startDate,
                       dueDate: () => dueDate,
                       tags: tags,
+                      category: () => category,
                     );
                     context.read<TaskBloc>().add(UpdateTaskEvent(updatedTask));
                     context.pop();

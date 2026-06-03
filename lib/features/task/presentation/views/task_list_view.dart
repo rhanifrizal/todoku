@@ -59,7 +59,7 @@ class TaskListView extends StatelessWidget {
           elevation: 2,
           floating: true,
           surfaceTintColor: Colors.transparent,
-          backgroundColor: Colors.transparent,
+          backgroundColor: context.colorScheme.surface,
         ),
 
         /// Floating Sticky Filter

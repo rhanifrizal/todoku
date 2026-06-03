@@ -2,7 +2,6 @@ import 'package:drift/drift.dart';
 import 'package:todoku/core/database/secure_database.dart';
 import 'package:todoku/features/task/data/datasources/task_local_datasource.dart';
 import 'package:todoku/features/task/data/models/task_model.dart';
-import 'package:todoku/features/task/domain/entities/task_entity.dart';
 
 final class TaskLocalDataSourceImpl implements TaskLocalDataSource {
   final SecureDatabase _db;
@@ -19,14 +18,6 @@ final class TaskLocalDataSourceImpl implements TaskLocalDataSource {
     final rows = await query.get();
 
     return rows.map((row) {
-      TaskPriority mappedPriority;
-
-      try {
-        mappedPriority = TaskPriority.values.byName(row.priority);
-      } catch (_) {
-        mappedPriority = TaskPriority.low;
-      }
-
       return TaskModel(
         id: row.id,
         title: row.title,
@@ -36,7 +27,7 @@ final class TaskLocalDataSourceImpl implements TaskLocalDataSource {
         dueDate: row.dueDate,
         tags: row.tags,
         category: row.category,
-        priority: mappedPriority,
+        priority: row.priority,
         groupId: row.groupId,
       );
     }).toList();
@@ -56,7 +47,7 @@ final class TaskLocalDataSourceImpl implements TaskLocalDataSource {
             dueDate: Value(task.dueDate),
             tags: task.tags,
             category: Value(task.category),
-            priority: task.priority.name,
+            priority: task.priority,
             groupId: Value(task.groupId),
           ),
         );
@@ -77,7 +68,7 @@ final class TaskLocalDataSourceImpl implements TaskLocalDataSource {
             dueDate: Value(task.dueDate),
             tags: task.tags,
             category: Value(task.category),
-            priority: task.priority.name,
+            priority: task.priority,
             groupId: Value(task.groupId),
           ),
           mode: InsertMode.insertOrReplace,

@@ -1,10 +1,5 @@
-enum TaskPriority {
-  low,
-  medium,
-  high;
-
-  bool get isHigh => this == TaskPriority.high;
-}
+import 'package:todoku/core/enums/task_category_enum.dart';
+import 'package:todoku/core/enums/task_priority_enum.dart';
 
 class TaskEntity {
   final String id;
@@ -14,7 +9,7 @@ class TaskEntity {
   final DateTime dateStart;
   final DateTime? dueDate;
   final List<String> tags;
-  final String? category;
+  final TaskCategory? category;
   final TaskPriority priority;
   final String? groupId;
 
@@ -39,7 +34,7 @@ class TaskEntity {
     DateTime? dateStart,
     DateTime? Function()? dueDate,
     List<String>? tags,
-    String? Function()? category,
+    TaskCategory? Function()? category,
     TaskPriority? priority,
     String? Function()? groupId,
   }) {

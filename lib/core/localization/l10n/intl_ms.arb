@@ -43,5 +43,12 @@
   "editTask": "Edit Tugasan",
   "updateTask": "Kemas Kini Tugasan",
   "searchTasks": "Cari Tugasan atau #tag...",
-  "all": "Semua"
+  "all": "Semua",
+  "category": "Category",
+  "none": "None",
+  "personal": "Personal",
+  "work": "Work",
+  "shopping": "Shopping",
+  "health": "Health",
+  "finance": "Finance"
 }

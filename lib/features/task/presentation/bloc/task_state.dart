@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:todoku/core/enums/task_category_enum.dart';
+import 'package:todoku/core/enums/task_priority_enum.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 
 enum TaskStatus { initial, loading, success, failure }
@@ -8,6 +10,7 @@ final class TaskState extends Equatable {
   final TaskStatus status;
   final String searchQuery;
   final TaskPriority? priorityFilter;
+  final TaskCategory? categoryFilter;
   final String? errorMessage;
 
   const TaskState({
@@ -15,6 +18,7 @@ final class TaskState extends Equatable {
     this.status = TaskStatus.initial,
     this.searchQuery = '',
     this.priorityFilter,
+    this.categoryFilter,
     this.errorMessage,
   });
 
@@ -23,6 +27,7 @@ final class TaskState extends Equatable {
     TaskStatus? status,
     String? searchQuery,
     TaskPriority? Function()? priorityFilter,
+    TaskCategory? Function()? categoryFilter,
     String? Function()? errorMessage,
   }) {
     return TaskState(
@@ -32,12 +37,17 @@ final class TaskState extends Equatable {
       priorityFilter: priorityFilter != null
           ? priorityFilter()
           : this.priorityFilter,
+      categoryFilter: categoryFilter != null
+          ? categoryFilter()
+          : this.categoryFilter,
       errorMessage: errorMessage != null ? errorMessage() : this.errorMessage,
     );
   }
 
   List<TaskEntity> get filteredTaskList {
-    if (searchQuery.isEmpty && priorityFilter == null) {
+    if (searchQuery.isEmpty &&
+        priorityFilter == null &&
+        categoryFilter == null) {
       return taskList;
     }
 
@@ -63,7 +73,11 @@ final class TaskState extends Equatable {
 
       final matchesPriority =
           priorityFilter == null || task.priority == priorityFilter;
-      return matchesSearch && matchesPriority;
+
+      final matchesCategory =
+          categoryFilter == null || task.category == categoryFilter;
+
+      return matchesSearch && matchesPriority && matchesCategory;
     }).toList();
   }
 
@@ -81,6 +95,7 @@ final class TaskState extends Equatable {
     status,
     searchQuery,
     priorityFilter,
+    categoryFilter,
     errorMessage,
   ];
 }

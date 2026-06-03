@@ -51,7 +51,15 @@ class AddTaskBottomSheetBody extends StatelessWidget {
             TaskForm(
               buttonLabel: context.l10n.saveTask,
               onSubmit:
-                  (title, description, priority, startDate, dueDate, tags) {
+                  (
+                    title,
+                    description,
+                    priority,
+                    startDate,
+                    dueDate,
+                    tags,
+                    category,
+                  ) {
                     final newTask = TaskEntity(
                       id: DateTime.now().millisecondsSinceEpoch.toString(),
                       title: title,
@@ -61,7 +69,7 @@ class AddTaskBottomSheetBody extends StatelessWidget {
                       dueDate: dueDate,
                       tags: tags,
                       priority: priority,
-                      category: null,
+                      category: category,
                       groupId: null,
                     );
                     context.read<TaskBloc>().add(CreateTaskEvent(newTask));

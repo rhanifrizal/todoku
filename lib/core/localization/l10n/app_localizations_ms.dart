@@ -146,4 +146,25 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get all => 'Semua';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get none => 'None';
+
+  @override
+  String get personal => 'Personal';
+
+  @override
+  String get work => 'Work';
+
+  @override
+  String get shopping => 'Shopping';
+
+  @override
+  String get health => 'Health';
+
+  @override
+  String get finance => 'Finance';
 }

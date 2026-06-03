@@ -116,6 +116,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       state.copyWith(
         searchQuery: event.searchQuery,
         priorityFilter: () => event.priorityFilter,
+        categoryFilter: () => event.categoryFilter,
       ),
     );
   }

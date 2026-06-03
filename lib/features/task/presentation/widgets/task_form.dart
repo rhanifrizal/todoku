@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todoku/core/enums/task_category_enum.dart';
+import 'package:todoku/core/enums/task_priority_enum.dart';
 import 'package:todoku/core/extensions/context_extensions.dart';
 import 'package:todoku/core/extensions/date_time_extensions.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
+import 'package:todoku/features/task/presentation/utils/task_enum_extensions.dart';
 
 class TaskForm extends StatefulWidget {
   final TaskEntity? initialTask;
@@ -13,6 +16,7 @@ class TaskForm extends StatefulWidget {
     DateTime startDate,
     DateTime? dueDate,
     List<String> tags,
+    TaskCategory? category,
   )
   onSubmit;
 
@@ -36,6 +40,7 @@ class _TaskFormState extends State<TaskForm> {
   late TaskPriority _selectedPriority;
   late DateTime _startDate;
   DateTime? _dueDate;
+  TaskCategory? _selectedCategory;
 
   static const int _maxTagsPerTask = 5;
   static const int _maxTagLength = 15;
@@ -55,6 +60,7 @@ class _TaskFormState extends State<TaskForm> {
     _selectedPriority = widget.initialTask?.priority ?? TaskPriority.medium;
     _startDate = widget.initialTask?.dateStart ?? DateTime.now();
     _dueDate = widget.initialTask?.dueDate;
+    _selectedCategory = widget.initialTask?.category;
   }
 
   @override
@@ -111,6 +117,7 @@ class _TaskFormState extends State<TaskForm> {
       _startDate,
       _dueDate,
       _parseAndSanitizeTags(_tagsController.text),
+      _selectedCategory,
     );
   }
 
@@ -174,20 +181,56 @@ class _TaskFormState extends State<TaskForm> {
             },
           ),
           const SizedBox(height: elementSpacing),
+          Text(context.l10n.category, style: context.textTheme.bodyLarge),
+          const SizedBox(height: 6),
+          SizedBox(
+            height: 40,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: ChoiceChip(
+                    avatar: const Icon(Icons.clear, size: 16),
+                    label: Text(context.l10n.none),
+                    showCheckmark: false,
+                    selected: _selectedCategory == null,
+                    onSelected: (selected) {
+                      if (selected) setState(() => _selectedCategory = null);
+                    },
+                  ),
+                ),
+                ...TaskCategory.values.map((category) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: ChoiceChip(
+                      avatar: Icon(category.icon, size: 16),
+                      label: Text(
+                        category.toLocalizedName(context).toUpperCase(),
+                      ),
+                      showCheckmark: false,
+                      selected: _selectedCategory == category,
+                      onSelected: (selected) {
+                        setState(() {
+                          _selectedCategory = selected ? category : null;
+                        });
+                      },
+                    ),
+                  );
+                }),
+              ],
+            ),
+          ),
+          const SizedBox(height: elementSpacing),
           Text(context.l10n.priority, style: context.textTheme.bodyLarge),
           const SizedBox(height: 6),
           Row(
             children: TaskPriority.values.map((priority) {
-              final String localizedPriorityLabel = switch (priority) {
-                TaskPriority.low => context.l10n.low,
-                TaskPriority.medium => context.l10n.medium,
-                TaskPriority.high => context.l10n.high,
-              };
-
               return Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: ChoiceChip(
-                  label: Text(localizedPriorityLabel.toUpperCase()),
+                  label: Text(priority.toLocalizedName(context).toUpperCase()),
                   selected: _selectedPriority == priority,
                   onSelected: (selected) {
                     if (selected) setState(() => _selectedPriority = priority);

@@ -43,5 +43,12 @@
   "editTask": "Edit Task",
   "updateTask": "Update Task",
   "searchTasks": "Search Tasks or #tag...",
-  "all": "All"
+  "all": "All",
+  "category": "Category",
+  "none": "None",
+  "personal": "Personal",
+  "work": "Work",
+  "shopping": "Shopping",
+  "health": "Health",
+  "finance": "Finance"
 }

@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:todoku/core/enums/task_category_enum.dart';
+import 'package:todoku/core/enums/task_priority_enum.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 
 sealed class TaskEvent extends Equatable {
@@ -47,9 +49,14 @@ final class DeleteTaskEvent extends TaskEvent {
 final class FilterTasksEvent extends TaskEvent {
   final String searchQuery;
   final TaskPriority? priorityFilter;
+  final TaskCategory? categoryFilter;
 
-  const FilterTasksEvent({this.searchQuery = '', this.priorityFilter});
+  const FilterTasksEvent({
+    this.searchQuery = '',
+    this.priorityFilter,
+    this.categoryFilter,
+  });
 
   @override
-  List<Object?> get props => [searchQuery, priorityFilter];
+  List<Object?> get props => [searchQuery, priorityFilter, categoryFilter];
 }

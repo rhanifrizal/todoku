@@ -7,6 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import 'package:todoku/core/database/tables/tasks_table.dart';
 import 'package:todoku/core/utils/secure_storage_helper.dart';
+import 'package:todoku/core/enums/task_category_enum.dart';
+import 'package:todoku/core/enums/task_priority_enum.dart';
 
 part 'secure_database.g.dart';
 

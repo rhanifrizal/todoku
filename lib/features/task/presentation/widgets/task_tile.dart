@@ -6,6 +6,7 @@ import 'package:todoku/core/extensions/date_time_extensions.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
 import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
+import 'package:todoku/features/task/presentation/utils/task_enum_extensions.dart';
 import 'package:todoku/features/task/presentation/widgets/edit_task_bottom_sheet.dart';
 
 class TaskTile extends StatelessWidget {
@@ -13,27 +14,44 @@ class TaskTile extends StatelessWidget {
 
   const TaskTile({super.key, required this.task});
 
-  String _getLocalizedPriority(BuildContext context, TaskPriority priority) {
-    return switch (priority) {
-      TaskPriority.low => context.l10n.low,
-      TaskPriority.medium => context.l10n.medium,
-      TaskPriority.high => context.l10n.high,
-    };
-  }
+  Widget _buildCategoryBadge(BuildContext context) {
+    if (task.category == null) return const SizedBox.shrink();
 
-  Color _getPriorityColor(BuildContext context, TaskPriority priority) {
-    return switch (priority) {
-      TaskPriority.high => context.colorScheme.error,
-      TaskPriority.medium => context.colorScheme.tertiary,
-      TaskPriority.low => context.colorScheme.outline,
-    };
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        color: context.colorScheme.primaryContainer.withValues(alpha: 0.4),
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(
+          color: context.colorScheme.primary.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            task.category?.icon,
+            size: 11,
+            color: context.colorScheme.onPrimaryContainer,
+          ),
+          const SizedBox(width: 4),
+          Text(
+            task.category?.toLocalizedName(context).toUpperCase() ?? "",
+            style: context.textTheme.labelSmall?.copyWith(
+              color: context.colorScheme.onPrimaryContainer,
+              fontWeight: FontWeight.bold,
+              fontSize: 10,
+              letterSpacing: 0.5,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final priorityColor = _getPriorityColor(context, task.priority);
-    final localizedPriority = _getLocalizedPriority(context, task.priority);
-
     final bool isOverdue =
         task.dueDate != null &&
         task.dueDate!.isBefore(DateTime.now()) &&
@@ -139,20 +157,27 @@ class TaskTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
+                  _buildCategoryBadge(context),
+                  if (task.category != null) const SizedBox(width: 6),
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 6,
                       vertical: 2,
                     ),
                     decoration: BoxDecoration(
-                      color: priorityColor.withValues(alpha: 0.1),
+                      color: task.priority
+                          .toColor(context)
+                          .withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(4),
-                      border: Border.all(color: priorityColor, width: 1),
+                      border: Border.all(
+                        color: task.priority.toColor(context),
+                        width: 1,
+                      ),
                     ),
                     child: Text(
-                      localizedPriority.toUpperCase(),
+                      task.priority.toLocalizedName(context).toUpperCase(),
                       style: context.textTheme.labelSmall?.copyWith(
-                        color: priorityColor,
+                        color: task.priority.toColor(context),
                         fontWeight: FontWeight.bold,
                         letterSpacing: 0.5,
                       ),

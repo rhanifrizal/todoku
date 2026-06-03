@@ -55,18 +55,16 @@ class $TasksTableTable extends TasksTable
       GeneratedColumn<String>('tags', aliasedName, false,
               type: DriftSqlType.string, requiredDuringInsert: true)
           .withConverter<List<String>>($TasksTableTable.$convertertags);
-  static const VerificationMeta _categoryMeta =
-      const VerificationMeta('category');
   @override
-  late final GeneratedColumn<String> category = GeneratedColumn<String>(
-      'category', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _priorityMeta =
-      const VerificationMeta('priority');
+  late final GeneratedColumnWithTypeConverter<TaskCategory?, String> category =
+      GeneratedColumn<String>('category', aliasedName, true,
+              type: DriftSqlType.string, requiredDuringInsert: false)
+          .withConverter<TaskCategory?>($TasksTableTable.$convertercategoryn);
   @override
-  late final GeneratedColumn<String> priority = GeneratedColumn<String>(
-      'priority', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+  late final GeneratedColumnWithTypeConverter<TaskPriority, String> priority =
+      GeneratedColumn<String>('priority', aliasedName, false,
+              type: DriftSqlType.string, requiredDuringInsert: true)
+          .withConverter<TaskPriority>($TasksTableTable.$converterpriority);
   static const VerificationMeta _groupIdMeta =
       const VerificationMeta('groupId');
   @override
@@ -131,16 +129,6 @@ class $TasksTableTable extends TasksTable
       context.handle(_dueDateMeta,
           dueDate.isAcceptableOrUnknown(data['due_date']!, _dueDateMeta));
     }
-    if (data.containsKey('category')) {
-      context.handle(_categoryMeta,
-          category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
-    }
-    if (data.containsKey('priority')) {
-      context.handle(_priorityMeta,
-          priority.isAcceptableOrUnknown(data['priority']!, _priorityMeta));
-    } else if (isInserting) {
-      context.missing(_priorityMeta);
-    }
     if (data.containsKey('group_id')) {
       context.handle(_groupIdMeta,
           groupId.isAcceptableOrUnknown(data['group_id']!, _groupIdMeta));
@@ -168,10 +156,12 @@ class $TasksTableTable extends TasksTable
           .read(DriftSqlType.dateTime, data['${effectivePrefix}due_date']),
       tags: $TasksTableTable.$convertertags.fromSql(attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}tags'])!),
-      category: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}category']),
-      priority: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}priority'])!,
+      category: $TasksTableTable.$convertercategoryn.fromSql(attachedDatabase
+          .typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}category'])),
+      priority: $TasksTableTable.$converterpriority.fromSql(attachedDatabase
+          .typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}priority'])!),
       groupId: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}group_id']),
     );
@@ -184,6 +174,12 @@ class $TasksTableTable extends TasksTable
 
   static TypeConverter<List<String>, String> $convertertags =
       const ListStringConverter();
+  static JsonTypeConverter2<TaskCategory, String, String> $convertercategory =
+      const EnumNameConverter(TaskCategory.values);
+  static JsonTypeConverter2<TaskCategory?, String?, String?>
+      $convertercategoryn = JsonTypeConverter2.asNullable($convertercategory);
+  static JsonTypeConverter2<TaskPriority, String, String> $converterpriority =
+      const EnumNameConverter(TaskPriority.values);
 }
 
 class TasksTableData extends DataClass implements Insertable<TasksTableData> {
@@ -194,8 +190,8 @@ class TasksTableData extends DataClass implements Insertable<TasksTableData> {
   final DateTime dateStart;
   final DateTime? dueDate;
   final List<String> tags;
-  final String? category;
-  final String priority;
+  final TaskCategory? category;
+  final TaskPriority priority;
   final String? groupId;
   const TasksTableData(
       {required this.id,
@@ -224,9 +220,13 @@ class TasksTableData extends DataClass implements Insertable<TasksTableData> {
           Variable<String>($TasksTableTable.$convertertags.toSql(tags));
     }
     if (!nullToAbsent || category != null) {
-      map['category'] = Variable<String>(category);
+      map['category'] = Variable<String>(
+          $TasksTableTable.$convertercategoryn.toSql(category));
     }
-    map['priority'] = Variable<String>(priority);
+    {
+      map['priority'] =
+          Variable<String>($TasksTableTable.$converterpriority.toSql(priority));
+    }
     if (!nullToAbsent || groupId != null) {
       map['group_id'] = Variable<String>(groupId);
     }
@@ -265,8 +265,10 @@ class TasksTableData extends DataClass implements Insertable<TasksTableData> {
       dateStart: serializer.fromJson<DateTime>(json['dateStart']),
       dueDate: serializer.fromJson<DateTime?>(json['dueDate']),
       tags: serializer.fromJson<List<String>>(json['tags']),
-      category: serializer.fromJson<String?>(json['category']),
-      priority: serializer.fromJson<String>(json['priority']),
+      category: $TasksTableTable.$convertercategoryn
+          .fromJson(serializer.fromJson<String?>(json['category'])),
+      priority: $TasksTableTable.$converterpriority
+          .fromJson(serializer.fromJson<String>(json['priority'])),
       groupId: serializer.fromJson<String?>(json['groupId']),
     );
   }
@@ -281,8 +283,10 @@ class TasksTableData extends DataClass implements Insertable<TasksTableData> {
       'dateStart': serializer.toJson<DateTime>(dateStart),
       'dueDate': serializer.toJson<DateTime?>(dueDate),
       'tags': serializer.toJson<List<String>>(tags),
-      'category': serializer.toJson<String?>(category),
-      'priority': serializer.toJson<String>(priority),
+      'category': serializer.toJson<String?>(
+          $TasksTableTable.$convertercategoryn.toJson(category)),
+      'priority': serializer
+          .toJson<String>($TasksTableTable.$converterpriority.toJson(priority)),
       'groupId': serializer.toJson<String?>(groupId),
     };
   }
@@ -295,8 +299,8 @@ class TasksTableData extends DataClass implements Insertable<TasksTableData> {
           DateTime? dateStart,
           Value<DateTime?> dueDate = const Value.absent(),
           List<String>? tags,
-          Value<String?> category = const Value.absent(),
-          String? priority,
+          Value<TaskCategory?> category = const Value.absent(),
+          TaskPriority? priority,
           Value<String?> groupId = const Value.absent()}) =>
       TasksTableData(
         id: id ?? this.id,
@@ -371,8 +375,8 @@ class TasksTableCompanion extends UpdateCompanion<TasksTableData> {
   final Value<DateTime> dateStart;
   final Value<DateTime?> dueDate;
   final Value<List<String>> tags;
-  final Value<String?> category;
-  final Value<String> priority;
+  final Value<TaskCategory?> category;
+  final Value<TaskPriority> priority;
   final Value<String?> groupId;
   final Value<int> rowid;
   const TasksTableCompanion({
@@ -397,7 +401,7 @@ class TasksTableCompanion extends UpdateCompanion<TasksTableData> {
     this.dueDate = const Value.absent(),
     required List<String> tags,
     this.category = const Value.absent(),
-    required String priority,
+    required TaskPriority priority,
     this.groupId = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : id = Value(id),
@@ -442,8 +446,8 @@ class TasksTableCompanion extends UpdateCompanion<TasksTableData> {
       Value<DateTime>? dateStart,
       Value<DateTime?>? dueDate,
       Value<List<String>>? tags,
-      Value<String?>? category,
-      Value<String>? priority,
+      Value<TaskCategory?>? category,
+      Value<TaskPriority>? priority,
       Value<String?>? groupId,
       Value<int>? rowid}) {
     return TasksTableCompanion(
@@ -487,10 +491,12 @@ class TasksTableCompanion extends UpdateCompanion<TasksTableData> {
           Variable<String>($TasksTableTable.$convertertags.toSql(tags.value));
     }
     if (category.present) {
-      map['category'] = Variable<String>(category.value);
+      map['category'] = Variable<String>(
+          $TasksTableTable.$convertercategoryn.toSql(category.value));
     }
     if (priority.present) {
-      map['priority'] = Variable<String>(priority.value);
+      map['priority'] = Variable<String>(
+          $TasksTableTable.$converterpriority.toSql(priority.value));
     }
     if (groupId.present) {
       map['group_id'] = Variable<String>(groupId.value);
@@ -539,8 +545,8 @@ typedef $$TasksTableTableCreateCompanionBuilder = TasksTableCompanion Function({
   required DateTime dateStart,
   Value<DateTime?> dueDate,
   required List<String> tags,
-  Value<String?> category,
-  required String priority,
+  Value<TaskCategory?> category,
+  required TaskPriority priority,
   Value<String?> groupId,
   Value<int> rowid,
 });
@@ -552,8 +558,8 @@ typedef $$TasksTableTableUpdateCompanionBuilder = TasksTableCompanion Function({
   Value<DateTime> dateStart,
   Value<DateTime?> dueDate,
   Value<List<String>> tags,
-  Value<String?> category,
-  Value<String> priority,
+  Value<TaskCategory?> category,
+  Value<TaskPriority> priority,
   Value<String?> groupId,
   Value<int> rowid,
 });
@@ -590,11 +596,15 @@ class $$TasksTableTableFilterComposer
           column: $table.tags,
           builder: (column) => ColumnWithTypeConverterFilters(column));
 
-  ColumnFilters<String> get category => $composableBuilder(
-      column: $table.category, builder: (column) => ColumnFilters(column));
+  ColumnWithTypeConverterFilters<TaskCategory?, TaskCategory, String>
+      get category => $composableBuilder(
+          column: $table.category,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
 
-  ColumnFilters<String> get priority => $composableBuilder(
-      column: $table.priority, builder: (column) => ColumnFilters(column));
+  ColumnWithTypeConverterFilters<TaskPriority, TaskPriority, String>
+      get priority => $composableBuilder(
+          column: $table.priority,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
 
   ColumnFilters<String> get groupId => $composableBuilder(
       column: $table.groupId, builder: (column) => ColumnFilters(column));
@@ -670,10 +680,10 @@ class $$TasksTableTableAnnotationComposer
   GeneratedColumnWithTypeConverter<List<String>, String> get tags =>
       $composableBuilder(column: $table.tags, builder: (column) => column);
 
-  GeneratedColumn<String> get category =>
+  GeneratedColumnWithTypeConverter<TaskCategory?, String> get category =>
       $composableBuilder(column: $table.category, builder: (column) => column);
 
-  GeneratedColumn<String> get priority =>
+  GeneratedColumnWithTypeConverter<TaskPriority, String> get priority =>
       $composableBuilder(column: $table.priority, builder: (column) => column);
 
   GeneratedColumn<String> get groupId =>
@@ -713,8 +723,8 @@ class $$TasksTableTableTableManager extends RootTableManager<
             Value<DateTime> dateStart = const Value.absent(),
             Value<DateTime?> dueDate = const Value.absent(),
             Value<List<String>> tags = const Value.absent(),
-            Value<String?> category = const Value.absent(),
-            Value<String> priority = const Value.absent(),
+            Value<TaskCategory?> category = const Value.absent(),
+            Value<TaskPriority> priority = const Value.absent(),
             Value<String?> groupId = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
@@ -739,8 +749,8 @@ class $$TasksTableTableTableManager extends RootTableManager<
             required DateTime dateStart,
             Value<DateTime?> dueDate = const Value.absent(),
             required List<String> tags,
-            Value<String?> category = const Value.absent(),
-            required String priority,
+            Value<TaskCategory?> category = const Value.absent(),
+            required TaskPriority priority,
             Value<String?> groupId = const Value.absent(),
             Value<int> rowid = const Value.absent(),
           }) =>
