@@ -41,5 +41,7 @@
   "tagTooLongError": "Individual tags cannot exceed 15 characters",
   "tooManyTagsError": "You can add a maximum of 5 tags",
   "editTask": "Edit Task",
-  "updateTask": "Update Task"
+  "updateTask": "Update Task",
+  "searchTasks": "Search Tasks or #tag...",
+  "all": "All"
 }

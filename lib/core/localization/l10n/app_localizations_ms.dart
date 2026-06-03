@@ -140,4 +140,10 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get updateTask => 'Kemas Kini Tugasan';
+
+  @override
+  String get searchTasks => 'Cari Tugasan atau #tag...';
+
+  @override
+  String get all => 'Semua';
 }

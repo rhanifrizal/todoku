@@ -355,6 +355,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update Task'**
   String get updateTask;
+
+  /// No description provided for @searchTasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Tasks or #tag...'**
+  String get searchTasks;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
 }
 
 class _AppLocalizationsDelegate

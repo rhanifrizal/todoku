@@ -27,6 +27,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<CreateTaskEvent>(_onCreateTask);
     on<UpdateTaskEvent>(_onUpdateTask);
     on<DeleteTaskEvent>(_onDeleteTask);
+    on<FilterTasksEvent>(_onFilterTasks);
   }
 
   Future<void> _onLoadTasks(
@@ -108,5 +109,14 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     } else {
       add(const LoadTasksEvent());
     }
+  }
+
+  void _onFilterTasks(FilterTasksEvent event, Emitter<TaskState> emit) {
+    emit(
+      state.copyWith(
+        searchQuery: event.searchQuery,
+        priorityFilter: () => event.priorityFilter,
+      ),
+    );
   }
 }

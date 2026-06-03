@@ -42,3 +42,14 @@ final class DeleteTaskEvent extends TaskEvent {
   @override
   List<Object?> get props => [id];
 }
+
+/// Triggered when a user searching for a task
+final class FilterTasksEvent extends TaskEvent {
+  final String searchQuery;
+  final TaskPriority? priorityFilter;
+
+  const FilterTasksEvent({this.searchQuery = '', this.priorityFilter});
+
+  @override
+  List<Object?> get props => [searchQuery, priorityFilter];
+}

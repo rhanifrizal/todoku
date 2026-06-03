@@ -140,4 +140,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateTask => 'Update Task';
+
+  @override
+  String get searchTasks => 'Search Tasks or #tag...';
+
+  @override
+  String get all => 'All';
 }
