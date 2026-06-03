@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todoku/core/enums/task_category_enum.dart';
-import 'package:todoku/core/enums/task_priority_enum.dart';
+import 'package:todoku/core/enums/task/task_category_enum.dart';
+import 'package:todoku/core/enums/task/task_priority_enum.dart';
 import 'package:todoku/core/extensions/context_extensions.dart';
 import 'package:todoku/core/extensions/date_time_extensions.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';

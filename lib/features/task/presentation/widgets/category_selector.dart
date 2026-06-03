@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todoku/core/enums/task_category_enum.dart';
+import 'package:todoku/core/enums/task/task_category_enum.dart';
 import 'package:todoku/core/extensions/context_extensions.dart';
 import 'package:todoku/features/task/presentation/utils/task_enum_extensions.dart';
 

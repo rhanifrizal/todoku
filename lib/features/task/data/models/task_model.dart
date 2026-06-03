@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
-import 'package:todoku/core/enums/task_category_enum.dart';
-import 'package:todoku/core/enums/task_priority_enum.dart';
+import 'package:todoku/core/enums/task/task_category_enum.dart';
+import 'package:todoku/core/enums/task/task_priority_enum.dart';
 
 part 'task_model.g.dart';
 

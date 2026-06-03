@@ -1,5 +1,5 @@
-import 'package:todoku/core/enums/task_category_enum.dart';
-import 'package:todoku/core/enums/task_priority_enum.dart';
+import 'package:todoku/core/enums/task/task_category_enum.dart';
+import 'package:todoku/core/enums/task/task_priority_enum.dart';
 
 class TaskEntity {
   final String id;

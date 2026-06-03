@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:todoku/core/database/secure_database.dart';
-import 'package:todoku/core/enums/task_category_enum.dart';
-import 'package:todoku/core/enums/task_priority_enum.dart';
+import 'package:todoku/core/enums/task/task_category_enum.dart';
+import 'package:todoku/core/enums/task/task_priority_enum.dart';
 
 class TasksTable extends Table {
   TextColumn get id => text()();
