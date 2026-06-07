@@ -167,4 +167,83 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get finance => 'Finance';
+
+  @override
+  String get projectGroups => 'Project Groups';
+
+  @override
+  String get noActiveTasksInThisGroup => 'No active tasks in this group';
+
+  @override
+  String get groupProgress => 'Group Progress';
+
+  @override
+  String targetDeadline(Object date) {
+    return 'Target Deadline: $date';
+  }
+
+  @override
+  String deadline(Object date) {
+    return 'Deadline: $date';
+  }
+
+  @override
+  String get editGroup => 'Edit Group';
+
+  @override
+  String get deleteGroup => 'Delete Group';
+
+  @override
+  String get deleteGroupQuestionMark => 'Delete Group?';
+
+  @override
+  String get allTasksInThisGroupWillAlsoBeDeletedThisCannotBeUndone =>
+      'All tasks in this group will also be deleted. This cannot be undone.';
+
+  @override
+  String get editGroupDetails => 'Edit Group Details';
+
+  @override
+  String get groupName => 'Group Name';
+
+  @override
+  String get enterGroupName => 'Enter group name';
+
+  @override
+  String get noTargetDeadlineSet => 'No Target Deadline Set';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get createNewProjectGroup => 'Create New Project Group';
+
+  @override
+  String get newTaskGroup => 'New Task Group';
+
+  @override
+  String get groupNameHint => 'e.g., Work, Fitness, Errands';
+
+  @override
+  String get nameIsRequired => 'Name is required';
+
+  @override
+  String get setTargetDueDate => 'Set Target Due Date';
+
+  @override
+  String get createWorkspace => 'Create Workspace';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String dueDate(Object date) {
+    return 'Due: $date';
+  }
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get task => 'Task';
 }

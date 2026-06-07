@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todoku/core/extensions/context_extensions.dart';
-import 'package:todoku/features/task/domain/entities/task_entity.dart';
+import 'package:todoku/features/task/domain/entities/task_group_entity.dart';
 import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
-import 'package:todoku/features/task/presentation/widgets/task_form.dart';
 
-void showEditTaskBottomSheet(BuildContext context, {required TaskEntity task}) {
+import 'group_form.dart';
+
+void showEditGroupBottomSheet(
+  BuildContext context, {
+  required TaskGroupEntity group,
+}) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -18,16 +22,16 @@ void showEditTaskBottomSheet(BuildContext context, {required TaskEntity task}) {
     builder: (bottomSheetContext) {
       return BlocProvider.value(
         value: BlocProvider.of<TaskBloc>(context),
-        child: EditTaskBottomSheetBody(task: task),
+        child: EditGroupBottomSheetBody(group: group),
       );
     },
   );
 }
 
-class EditTaskBottomSheetBody extends StatelessWidget {
-  final TaskEntity task;
+class EditGroupBottomSheetBody extends StatelessWidget {
+  final TaskGroupEntity group;
 
-  const EditTaskBottomSheetBody({super.key, required this.task});
+  const EditGroupBottomSheetBody({super.key, required this.group});
 
   @override
   Widget build(BuildContext context) {
@@ -44,37 +48,24 @@ class EditTaskBottomSheetBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              context.l10n.editTask,
+              context.l10n.editGroupDetails,
               style: context.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
-            TaskForm(
-              initialTask: task,
-              buttonLabel: context.l10n.updateTask,
-              onSubmit:
-                  (
-                    title,
-                    description,
-                    priority,
-                    startDate,
-                    dueDate,
-                    tags,
-                    category,
-                  ) {
-                    final updatedTask = task.copyWith(
-                      title: title,
-                      description: description,
-                      priority: priority,
-                      dateStart: startDate,
-                      dueDate: () => dueDate,
-                      tags: tags,
-                      category: () => category,
-                    );
-                    context.read<TaskBloc>().add(UpdateTaskEvent(updatedTask));
-                    context.pop();
-                  },
+            GroupForm(
+              initialGroup: group,
+              buttonLabel: context.l10n.saveChanges,
+              onSubmit: (name, dueDate) {
+                final updatedGroup = group.copyWith(
+                  name: name,
+                  dueDate: () => dueDate,
+                );
+
+                context.read<TaskBloc>().add(UpdateGroupEvent(updatedGroup));
+                context.pop();
+              },
             ),
           ],
         ),

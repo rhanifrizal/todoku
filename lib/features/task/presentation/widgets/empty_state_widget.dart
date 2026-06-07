@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:todoku/core/extensions/context_extensions.dart';
-class EmptyStateWidget extends StatelessWidget {
-  final bool isCompletedTasksSection;
 
-  const EmptyStateWidget({super.key, this.isCompletedTasksSection = false});
+class EmptyStateWidget extends StatelessWidget {
+  final bool isTaskCompleted;
+
+  const EmptyStateWidget({super.key, this.isTaskCompleted = false});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class EmptyStateWidget extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: isCompletedTasksSection
+                  color: isTaskCompleted
                       ? context.colorScheme.surfaceContainerHighest.withValues(
                           alpha: 0.3,
                         )
@@ -37,18 +38,18 @@ class EmptyStateWidget extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  isCompletedTasksSection
+                  isTaskCompleted
                       ? Icons.assignment_turned_in_outlined
                       : Icons.assignment_outlined,
                   size: 64,
-                  color: isCompletedTasksSection
+                  color: isTaskCompleted
                       ? context.colorScheme.outline
                       : context.colorScheme.primary,
                 ),
               ),
               const SizedBox(height: 24),
               Text(
-                isCompletedTasksSection
+                isTaskCompleted
                     ? context.l10n.noCompletedTasksYet
                     : context.l10n.allDoneForNow,
                 textAlign: TextAlign.center,
@@ -59,7 +60,7 @@ class EmptyStateWidget extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                isCompletedTasksSection
+                isTaskCompleted
                     ? context.l10n.completeYourTaskRightNow
                     : context.l10n.createANewTaskRightNow,
                 textAlign: TextAlign.center,

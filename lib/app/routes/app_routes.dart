@@ -3,15 +3,17 @@ import 'package:go_router/go_router.dart';
 import 'package:todoku/core/extensions/context_extensions.dart';
 import 'package:todoku/features/app_config/presentation/screens/settings_screen.dart';
 import 'package:todoku/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:todoku/features/task/presentation/screens/task_group_detail_screen.dart';
 import 'package:todoku/features/task/presentation/screens/task_list_screen.dart';
 
 class AppRoutes {
   static final GlobalKey<NavigatorState> _navigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: "rootNav");
+      GlobalKey<NavigatorState>();
 
   static const String root = "/";
   static const String taskList = "/taskList";
   static const String settings = "/settings";
+  static const String taskGroupDetail = "/taskGroupDetails/:groupId";
 
   static final GoRouter router = GoRouter(
     navigatorKey: _navigatorKey,
@@ -40,6 +42,14 @@ class AppRoutes {
           ),
         ],
       ),
+      GoRoute(
+        path: taskGroupDetail,
+        name: taskGroupDetail,
+        builder: (context, state) {
+          final id = state.pathParameters['groupId']!;
+          return TaskGroupDetailScreen(groupId: id);
+        },
+      ),
     ],
     errorBuilder: (context, state) => Scaffold(
       body: Center(
@@ -51,7 +61,3 @@ class AppRoutes {
     ),
   );
 }
-
-// Example path placeholders for future modules:
-// static const String taskDetails = '/tasks/:id';
-// static const String settings = '/settings';

@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:todoku/core/enums/task/task_category_enum.dart';
 import 'package:todoku/core/enums/task/task_priority_enum.dart';
 
-class TaskEntity {
+class TaskEntity extends Equatable {
   final String id;
   final String title;
   final String description;
@@ -27,7 +28,6 @@ class TaskEntity {
   });
 
   TaskEntity copyWith({
-    String? id,
     String? title,
     String? description,
     bool? isCompleted,
@@ -39,7 +39,7 @@ class TaskEntity {
     String? Function()? groupId,
   }) {
     return TaskEntity(
-      id: id ?? this.id,
+      id: id,
       title: title ?? this.title,
       description: description ?? this.description,
       isCompleted: isCompleted ?? this.isCompleted,
@@ -51,4 +51,18 @@ class TaskEntity {
       groupId: groupId != null ? groupId() : this.groupId,
     );
   }
+
+  @override
+  List<Object?> get props => [
+    id,
+    title,
+    description,
+    isCompleted,
+    dateStart,
+    dueDate,
+    tags,
+    category,
+    priority,
+    groupId,
+  ];
 }

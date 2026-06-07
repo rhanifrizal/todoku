@@ -5,6 +5,7 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+import 'package:todoku/core/database/tables/task_groups_table.dart';
 import 'package:todoku/core/database/tables/tasks_table.dart';
 import 'package:todoku/core/utils/secure_storage_helper.dart';
 import 'package:todoku/core/enums/task/task_category_enum.dart';
@@ -12,7 +13,7 @@ import 'package:todoku/core/enums/task/task_priority_enum.dart';
 
 part 'secure_database.g.dart';
 
-@DriftDatabase(tables: [TasksTable])
+@DriftDatabase(tables: [TasksTable, TaskGroupsTable])
 class SecureDatabase extends _$SecureDatabase {
   static const String _dbKeyName = "SQLCIPHER_PASSPHRASE";
 
@@ -46,6 +47,7 @@ class SecureDatabase extends _$SecureDatabase {
           rawDb.execute("PRAGMA key = '$passphrase';");
           rawDb.execute("PRAGMA cipher = 'sqlcipher';");
           rawDb.execute("PRAGMA legacy = 4;");
+          rawDb.execute("PRAGMA foreign_keys = ON;");
         },
       );
     });

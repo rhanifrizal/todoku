@@ -13,9 +13,13 @@ import 'package:todoku/features/task/data/datasources/task_local_datasource.dart
 import 'package:todoku/features/task/data/datasources/task_local_datasource_impl.dart';
 import 'package:todoku/features/task/data/repositories/task_repository_impl.dart';
 import 'package:todoku/features/task/domain/repositories/task_repository.dart';
+import 'package:todoku/features/task/domain/usecases/create_group_usecase.dart';
 import 'package:todoku/features/task/domain/usecases/create_task_usecase.dart';
+import 'package:todoku/features/task/domain/usecases/delete_group_usecase.dart';
 import 'package:todoku/features/task/domain/usecases/delete_task_usecase.dart';
+import 'package:todoku/features/task/domain/usecases/get_groups_usecase.dart';
 import 'package:todoku/features/task/domain/usecases/get_tasks_usecase.dart';
+import 'package:todoku/features/task/domain/usecases/update_group_usecase.dart';
 import 'package:todoku/features/task/domain/usecases/update_task_usecase.dart';
 import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 
@@ -63,6 +67,10 @@ Future<void> initInjection() async {
   sl.registerLazySingleton(() => DeleteTaskUsecase(sl()));
   sl.registerLazySingleton(() => GetAppConfigUsecase(sl()));
   sl.registerLazySingleton(() => SaveAppConfigUsecase(sl()));
+  sl.registerLazySingleton(() => GetGroupsUsecase(sl()));
+  sl.registerLazySingleton(() => CreateGroupUsecase(sl()));
+  sl.registerLazySingleton(() => UpdateGroupUsecase(sl()));
+  sl.registerLazySingleton(() => DeleteGroupUsecase(sl()));
 
   // Presentation Layer
   sl.registerFactory(
@@ -71,6 +79,10 @@ Future<void> initInjection() async {
       createTaskUsecase: sl(),
       updateTaskUsecase: sl(),
       deleteTaskUsecase: sl(),
+      getGroupsUsecase: sl(),
+      createGroupUsecase: sl(),
+      updateGroupUsecase: sl(),
+      deleteGroupUsecase: sl(),
     ),
   );
 

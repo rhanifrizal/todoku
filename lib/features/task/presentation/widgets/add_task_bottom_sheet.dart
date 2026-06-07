@@ -7,7 +7,7 @@ import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
 import 'package:todoku/features/task/presentation/bloc/task_event.dart';
 import 'package:todoku/features/task/presentation/widgets/task_form.dart';
 
-void showAddTaskSheet(BuildContext context) {
+void showAddTaskBottomSheet(BuildContext context, {String? groupId}) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -18,14 +18,16 @@ void showAddTaskSheet(BuildContext context) {
     builder: (bottomSheetContext) {
       return BlocProvider.value(
         value: BlocProvider.of<TaskBloc>(context),
-        child: const AddTaskBottomSheetBody(),
+        child: AddTaskBottomSheetBody(groupId: groupId),
       );
     },
   );
 }
 
 class AddTaskBottomSheetBody extends StatelessWidget {
-  const AddTaskBottomSheetBody({super.key});
+  final String? groupId;
+
+  const AddTaskBottomSheetBody({super.key, this.groupId});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +72,7 @@ class AddTaskBottomSheetBody extends StatelessWidget {
                       tags: tags,
                       priority: priority,
                       category: category,
-                      groupId: null,
+                      groupId: groupId,
                     );
                     context.read<TaskBloc>().add(CreateTaskEvent(newTask));
                     context.pop();

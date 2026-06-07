@@ -409,6 +409,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Finance'**
   String get finance;
+
+  /// No description provided for @projectGroups.
+  ///
+  /// In en, this message translates to:
+  /// **'Project Groups'**
+  String get projectGroups;
+
+  /// No description provided for @noActiveTasksInThisGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'No active tasks in this group'**
+  String get noActiveTasksInThisGroup;
+
+  /// No description provided for @groupProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Group Progress'**
+  String get groupProgress;
+
+  /// No description provided for @targetDeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Deadline: {date}'**
+  String targetDeadline(Object date);
+
+  /// No description provided for @deadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Deadline: {date}'**
+  String deadline(Object date);
+
+  /// No description provided for @editGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Group'**
+  String get editGroup;
+
+  /// No description provided for @deleteGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Group'**
+  String get deleteGroup;
+
+  /// No description provided for @deleteGroupQuestionMark.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Group?'**
+  String get deleteGroupQuestionMark;
+
+  /// No description provided for @allTasksInThisGroupWillAlsoBeDeletedThisCannotBeUndone.
+  ///
+  /// In en, this message translates to:
+  /// **'All tasks in this group will also be deleted. This cannot be undone.'**
+  String get allTasksInThisGroupWillAlsoBeDeletedThisCannotBeUndone;
+
+  /// No description provided for @editGroupDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Group Details'**
+  String get editGroupDetails;
+
+  /// No description provided for @groupName.
+  ///
+  /// In en, this message translates to:
+  /// **'Group Name'**
+  String get groupName;
+
+  /// No description provided for @enterGroupName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter group name'**
+  String get enterGroupName;
+
+  /// No description provided for @noTargetDeadlineSet.
+  ///
+  /// In en, this message translates to:
+  /// **'No Target Deadline Set'**
+  String get noTargetDeadlineSet;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
+
+  /// No description provided for @createNewProjectGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Create New Project Group'**
+  String get createNewProjectGroup;
+
+  /// No description provided for @newTaskGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'New Task Group'**
+  String get newTaskGroup;
+
+  /// No description provided for @groupNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Work, Fitness, Errands'**
+  String get groupNameHint;
+
+  /// No description provided for @nameIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get nameIsRequired;
+
+  /// No description provided for @setTargetDueDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Target Due Date'**
+  String get setTargetDueDate;
+
+  /// No description provided for @createWorkspace.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Workspace'**
+  String get createWorkspace;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @dueDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Due: {date}'**
+  String dueDate(Object date);
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @task.
+  ///
+  /// In en, this message translates to:
+  /// **'Task'**
+  String get task;
 }
 
 class _AppLocalizationsDelegate

@@ -115,9 +115,7 @@ class TaskFilterHeader extends SliverPersistentHeaderDelegate {
                       padding: const EdgeInsets.only(right: 8.0),
                       child: FilterChip(
                         avatar: Icon(category.icon, size: 14),
-                        label: Text(
-                          category.toLocalizedName(context).toUpperCase(),
-                        ),
+                        label: Text(category.toLocalizedName(context)),
                         showCheckmark: false,
                         selected: currentCategory == category,
                         onSelected: (selected) {

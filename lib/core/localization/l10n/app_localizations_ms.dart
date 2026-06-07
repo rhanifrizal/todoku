@@ -148,23 +148,103 @@ class AppLocalizationsMs extends AppLocalizations {
   String get all => 'Semua';
 
   @override
-  String get category => 'Category';
+  String get category => 'Kategori';
 
   @override
-  String get none => 'None';
+  String get none => 'Tiada';
 
   @override
-  String get personal => 'Personal';
+  String get personal => 'Peribadi';
 
   @override
-  String get work => 'Work';
+  String get work => 'Kerja';
 
   @override
-  String get shopping => 'Shopping';
+  String get shopping => 'Membeli-belah';
 
   @override
-  String get health => 'Health';
+  String get health => 'Kesihatan';
 
   @override
-  String get finance => 'Finance';
+  String get finance => 'Kewangan';
+
+  @override
+  String get projectGroups => 'Kumpulan Projek';
+
+  @override
+  String get noActiveTasksInThisGroup =>
+      'Tiada tugasan aktif dalam kumpulan ini';
+
+  @override
+  String get groupProgress => 'Kemajuan Kumpulan';
+
+  @override
+  String targetDeadline(Object date) {
+    return 'Tarikh Akhir Sasaran: $date';
+  }
+
+  @override
+  String deadline(Object date) {
+    return 'Tarikh Akhir: $date';
+  }
+
+  @override
+  String get editGroup => 'Edit Kumpulan';
+
+  @override
+  String get deleteGroup => 'Padam Kumpulan';
+
+  @override
+  String get deleteGroupQuestionMark => 'Padam Kumpulan?';
+
+  @override
+  String get allTasksInThisGroupWillAlsoBeDeletedThisCannotBeUndone =>
+      'Semua tugasan dalam kumpulan ini juga akan dipadamkan. Tindakan ini tidak boleh diubah asal.';
+
+  @override
+  String get editGroupDetails => 'Edit Maklumat Kumpulan';
+
+  @override
+  String get groupName => 'Nama Kumpulan';
+
+  @override
+  String get enterGroupName => 'Masukkan nama kumpulan';
+
+  @override
+  String get noTargetDeadlineSet => 'Tiada Tarikh Akhir Sasaran Ditetapkan';
+
+  @override
+  String get saveChanges => 'Simpan Perubahan';
+
+  @override
+  String get createNewProjectGroup => 'Cipta Kumpulan Projek Baharu';
+
+  @override
+  String get newTaskGroup => 'Kumpulan Tugasan Baharu';
+
+  @override
+  String get groupNameHint => 'cth. Kerja, Kecergasan, Tugasan Harian';
+
+  @override
+  String get nameIsRequired => 'Nama wajib diisi';
+
+  @override
+  String get setTargetDueDate => 'Tetapkan Tarikh Akhir Sasaran';
+
+  @override
+  String get createWorkspace => 'Cipta Ruang Kerja';
+
+  @override
+  String get delete => 'Buang';
+
+  @override
+  String dueDate(Object date) {
+    return 'Tamat: $date';
+  }
+
+  @override
+  String get confirm => 'Pasti';
+
+  @override
+  String get task => 'Tugasan';
 }

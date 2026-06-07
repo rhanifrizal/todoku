@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:todoku/core/enums/task/task_category_enum.dart';
 import 'package:todoku/core/enums/task/task_priority_enum.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
+import 'package:todoku/features/task/domain/entities/task_group_entity.dart';
 
 sealed class TaskEvent extends Equatable {
   const TaskEvent();
@@ -59,4 +60,39 @@ final class FilterTasksEvent extends TaskEvent {
 
   @override
   List<Object?> get props => [searchQuery, priorityFilter, categoryFilter];
+}
+
+/// Triggered alongside LoadTaskEvent to sync local storage directories
+final class LoadGroupEvent extends TaskEvent {
+  const LoadGroupEvent();
+}
+
+/// Triggered to create a brand new parent workspace group
+final class CreateGroupEvent extends TaskEvent {
+  final TaskGroupEntity group;
+
+  const CreateGroupEvent(this.group);
+
+  @override
+  List<Object?> get props => [group];
+}
+
+/// Triggered to update group details
+final class UpdateGroupEvent extends TaskEvent {
+  final TaskGroupEntity group;
+
+  const UpdateGroupEvent(this.group);
+
+  @override
+  List<Object?> get props => [group];
+}
+
+/// Triggered to delete group
+final class DeleteGroupEvent extends TaskEvent {
+  final String groupId;
+
+  const DeleteGroupEvent(this.groupId);
+
+  @override
+  List<Object?> get props => [groupId];
 }

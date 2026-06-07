@@ -1,12 +1,16 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:todoku/core/enums/task/task_category_enum.dart';
 import 'package:todoku/core/enums/task/task_priority_enum.dart';
+import 'package:todoku/core/extensions/context_extensions.dart';
 import 'package:todoku/features/task/domain/entities/task_entity.dart';
+import 'package:todoku/features/task/domain/entities/task_group_entity.dart';
 
 enum TaskStatus { initial, loading, success, failure }
 
 final class TaskState extends Equatable {
   final List<TaskEntity> taskList;
+  final List<TaskGroupEntity> groupList;
   final TaskStatus status;
   final String searchQuery;
   final TaskPriority? priorityFilter;
@@ -15,6 +19,7 @@ final class TaskState extends Equatable {
 
   const TaskState({
     this.taskList = const [],
+    this.groupList = const [],
     this.status = TaskStatus.initial,
     this.searchQuery = '',
     this.priorityFilter,
@@ -24,6 +29,7 @@ final class TaskState extends Equatable {
 
   TaskState copyWith({
     List<TaskEntity>? taskList,
+    List<TaskGroupEntity>? groupList,
     TaskStatus? status,
     String? searchQuery,
     TaskPriority? Function()? priorityFilter,
@@ -32,6 +38,7 @@ final class TaskState extends Equatable {
   }) {
     return TaskState(
       taskList: taskList ?? this.taskList,
+      groupList: groupList ?? this.groupList,
       status: status ?? this.status,
       searchQuery: searchQuery ?? this.searchQuery,
       priorityFilter: priorityFilter != null
@@ -42,6 +49,24 @@ final class TaskState extends Equatable {
           : this.categoryFilter,
       errorMessage: errorMessage != null ? errorMessage() : this.errorMessage,
     );
+  }
+
+  /// Grabs only tasks that DO NOT belong to any groups
+  List<TaskEntity> get standaloneTaskList {
+    return filteredTaskList.where((task) => task.groupId == null).toList();
+  }
+
+  /// Grabs tasks assigned to a specific group
+  List<TaskEntity> getGroupTasks(String groupId) {
+    return taskList.where((task) => task.groupId == groupId).toList();
+  }
+
+  /// Calculates dynamic display metrics for a specific group card (e.g "3/5 Completed")
+  String getGroupProgressLabel(BuildContext context, String groupId) {
+    final groupTasks = getGroupTasks(groupId);
+    if (groupTasks.isEmpty) return "0 ${context.l10n.task}";
+    final completedCount = groupTasks.where((task) => task.isCompleted).length;
+    return "$completedCount / ${groupTasks.length} ${context.l10n.task}";
   }
 
   List<TaskEntity> get filteredTaskList {
@@ -92,6 +117,7 @@ final class TaskState extends Equatable {
   @override
   List<Object?> get props => [
     taskList,
+    groupList,
     status,
     searchQuery,
     priorityFilter,

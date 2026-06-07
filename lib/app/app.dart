@@ -8,6 +8,8 @@ import 'package:todoku/features/app_config/presentation/bloc/app_config_bloc.dar
 import 'package:todoku/features/app_config/presentation/bloc/app_config_event.dart';
 import 'package:todoku/features/app_config/presentation/bloc/app_config_state.dart';
 import 'package:todoku/features/app_config/presentation/widgets/security_overlay_switcher.dart';
+import 'package:todoku/features/task/presentation/bloc/task_bloc.dart';
+import 'package:todoku/features/task/presentation/bloc/task_event.dart';
 
 class TodoKuApp extends StatelessWidget {
   const TodoKuApp({super.key});
@@ -19,6 +21,11 @@ class TodoKuApp extends StatelessWidget {
         BlocProvider<AppConfigBloc>(
           create: (context) =>
               di.sl<AppConfigBloc>()..add(const InitConfigEvent()),
+        ),
+        BlocProvider<TaskBloc>(
+          create: (context) => di.sl<TaskBloc>()
+            ..add(const LoadTasksEvent())
+            ..add(const LoadGroupEvent()),
         ),
       ],
       child: BlocBuilder<AppConfigBloc, AppConfigState>(
